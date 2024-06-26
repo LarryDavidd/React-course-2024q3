@@ -1,4 +1,4 @@
-import MainPage from '@pages/MainPage/ui/MainPage';
+import { MainPage } from '@pages/MainPage';
 import { createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter([
