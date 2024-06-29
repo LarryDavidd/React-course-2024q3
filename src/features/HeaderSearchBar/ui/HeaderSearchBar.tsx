@@ -31,15 +31,12 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
   render() {
     return (
       <BaseForm onSubmit={this.handleSubmit}>
-        <div className="relative">
+        <div className="flex gap-2">
           <BaseInput
             onChange={this.handleInputChange}
             inputDetails={{}}
           />
-          <SimpleButton
-            onClick={() => {}}
-            buttonDetails={{ name: 'search' }}
-          />
+          <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
         </div>
       </BaseForm>
     );

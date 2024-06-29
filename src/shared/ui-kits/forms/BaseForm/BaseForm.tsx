@@ -7,14 +7,7 @@ type FormProps = {
 
 class Form extends Component<FormProps> {
   render() {
-    return (
-      <form
-        onSubmit={this.props.onSubmit}
-        className="mx-auto max-w-md"
-      >
-        {this.props.children}
-      </form>
-    );
+    return <form onSubmit={this.props.onSubmit}>{this.props.children}</form>;
   }
 }
 

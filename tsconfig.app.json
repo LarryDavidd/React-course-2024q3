@@ -35,5 +35,5 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "include": ["./eslintrc.cjs", "./src/**/*", "styled.d.ts"]
+  "include": ["env.d.ts", "./eslintrc.cjs", "./src/**/*", "styled.d.ts"]
 }
