@@ -1,25 +1,13 @@
-import { UseLocalStorage } from '@shared/lib';
 import { Component, createContext, ReactNode } from 'react';
 import getCardsInfo from '../api/getCardsInfo';
+import { IResponse } from '@shared/types/types';
+import { UseLocalStorage } from '@shared/lib';
 
-export type IResponse = {
-  id: number;
-  name: string;
-  status: string;
-  gender: string;
-  image: string;
-  species: string;
-  location: {
-    name: string;
-  };
-};
-
-type CardContextType = {
-  searchRequest: string;
+export type CardContextType = {
+  lastInputValue: string;
   res: IResponse[];
   isLoading: boolean;
-  setNewRes: (newData: IResponse[]) => void;
-  requestCardInfo: (newData: string) => void;
+  requestCardInfo: (newData: string[]) => void;
   setLoading: (newData: boolean) => void;
 };
 
@@ -28,7 +16,7 @@ type CardContextProps = {
 };
 
 type CardContextState = {
-  searchRequest: string;
+  lastInputValue: string;
   res: IResponse[];
   isLoading: boolean;
 };
@@ -40,7 +28,7 @@ class DataProvider extends Component<CardContextProps, CardContextState> {
     super(props);
 
     this.state = {
-      searchRequest: '',
+      lastInputValue: '',
       res: [],
       isLoading: true
     };
@@ -49,7 +37,14 @@ class DataProvider extends Component<CardContextProps, CardContextState> {
   requestCardInfo = async (queryArgs: string[]) => {
     this.setState({ isLoading: true });
     const res = await getCardsInfo(queryArgs);
-    console.log(res);
+
+    if (res instanceof Error) return;
+
+    this.setNewRes(res.results);
+
+    const queryArg = queryArgs.find((value) => value.includes('name='));
+    if (queryArg) this.setNewSerchRequest(queryArg.replace('name=', ''));
+
     this.setState({ isLoading: false });
   };
 
@@ -60,9 +55,8 @@ class DataProvider extends Component<CardContextProps, CardContextState> {
   };
 
   setNewSerchRequest = (newSearchRequest: string) => {
-    this.setState({
-      searchRequest: newSearchRequest
-    });
+    this.setState({ lastInputValue: newSearchRequest });
+    UseLocalStorage.getInstance().set('searchRequest', newSearchRequest);
   };
 
   setLoading = (isLoading: boolean) => {
@@ -71,24 +65,16 @@ class DataProvider extends Component<CardContextProps, CardContextState> {
     });
   };
 
-  componentDidMount() {
-    const value = UseLocalStorage.getInstance().load('searchRequest');
-    if (value) {
-      this.requestCardInfo([`name=${String(value)}`]);
-    }
-  }
-
   render() {
-    const { searchRequest, res, isLoading } = this.state;
+    const { res, isLoading, lastInputValue } = this.state;
     const { children } = this.props;
 
     return (
       <CardContext.Provider
         value={{
-          searchRequest,
+          lastInputValue,
           res,
           isLoading,
-          setNewRes: this.setNewRes,
           requestCardInfo: this.requestCardInfo,
           setLoading: this.setLoading
         }}

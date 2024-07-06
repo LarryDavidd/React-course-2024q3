@@ -5,6 +5,7 @@ import { BaseForm } from '@shared/ui-kits/forms';
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
+  value?: string;
 };
 
 type SearchBarState = {
@@ -34,7 +35,7 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
         <div className="flex gap-2">
           <BaseInput
             onChange={this.handleInputChange}
-            inputDetails={{}}
+            inputDetails={{ value: this.props.value }}
           />
           <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
         </div>

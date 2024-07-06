@@ -1,4 +1,8 @@
 import getCardsInfo from './api/getCardsInfo';
-import { DataProvider } from './context/CardContext';
+import { DataProvider, CardContext, CardContextType } from './context/CardContext';
+import Item from './ui/Item';
+import ItemList from './ui/ItemList';
 
-export { getCardsInfo, DataProvider };
+export { getCardsInfo };
+export { DataProvider, CardContext, type CardContextType };
+export { Item, ItemList };
