@@ -2,6 +2,7 @@ import { Component } from 'react';
 import HeaderSearchBar from '@features/HeaderSearchBar';
 import { CardContext, CardContextType } from '@entities/Cards/context/CardContext';
 import { UseLocalStorage } from '@shared/lib';
+import ErrorButton from '@shared/components/ErrorButton';
 
 export default class MainHeader extends Component {
   onSearch = (text: string) => {
@@ -23,11 +24,12 @@ export default class MainHeader extends Component {
     const { lastInputValue } = this.context as CardContextType;
 
     return (
-      <header className="flex min-h-20 w-full flex-col justify-center px-4 py-2 md:px-10">
+      <header className="flex min-h-20 w-full flex-col justify-center gap-5 px-4 py-2 md:px-10">
         <HeaderSearchBar
           onSearch={this.onSearch}
           value={lastInputValue}
         />
+        <ErrorButton />
       </header>
     );
   }

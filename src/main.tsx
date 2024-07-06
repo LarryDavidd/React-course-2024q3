@@ -1,12 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from '@app/App.tsx';
 
 import '@app/styles/tailwind.scss';
 
+import ErrorBoundary from '@shared/components/ErrorBoundary';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <ErrorBoundary>
     <App />
-  </React.StrictMode>
+  </ErrorBoundary>
 );

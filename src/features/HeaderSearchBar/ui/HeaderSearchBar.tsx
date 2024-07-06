@@ -16,7 +16,7 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
   constructor(props: SearchBarProps) {
     super(props);
     this.state = {
-      query: ''
+      query: props.value ? props.value : ''
     };
   }
 
@@ -35,8 +35,9 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
         <div className="flex gap-2">
           <BaseInput
             onChange={this.handleInputChange}
-            inputDetails={{ value: this.props.value }}
+            inputDetails={{ value: this.state.query }}
           />
+          {this.state.query}
           <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
         </div>
       </BaseForm>
