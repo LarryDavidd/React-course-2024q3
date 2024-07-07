@@ -37,7 +37,6 @@ export default class SearchBar extends Component<SearchBarProps, SearchBarState>
             onChange={this.handleInputChange}
             inputDetails={{ value: this.state.query }}
           />
-          {this.state.query}
           <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
         </div>
       </BaseForm>

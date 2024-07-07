@@ -11,20 +11,25 @@ export default class MainPage extends Component {
     if (context?.isLoading) {
       return <PageSpinner />;
     }
-    return context?.res ? (
-      <ItemList>
-        {context.res.map((character: IResponse) => (
-          <Item
-            key={character.id}
-            character={character}
-          />
-        ))}
-      </ItemList>
-    ) : (
-      <section>
-        <NotFoundSection />
-      </section>
-    );
+
+    if (context && context?.res.length > 0) {
+      return (
+        <ItemList>
+          {context.res.map((character: IResponse) => (
+            <Item
+              key={character.id}
+              character={character}
+            />
+          ))}
+        </ItemList>
+      );
+    } else {
+      return (
+        <section>
+          <NotFoundSection />
+        </section>
+      );
+    }
   }
 
   render(): JSX.Element {

@@ -4,7 +4,7 @@ class NotFoundSection extends Component {
   render() {
     return (
       <div>
-        <h2>Not Found</h2>
+        <h2 className="text-center">Nothing Not Found</h2>
       </div>
     );
   }

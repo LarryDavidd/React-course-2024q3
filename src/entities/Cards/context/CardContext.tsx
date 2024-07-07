@@ -37,15 +37,16 @@ class DataProvider extends Component<CardContextProps, CardContextState> {
   requestCardInfo = async (queryArgs: string[]) => {
     this.setState({ isLoading: true });
     const res = await getCardsInfo(queryArgs);
+    this.setState({ isLoading: false });
 
-    if (res instanceof Error) return;
-
-    this.setNewRes(res.results);
+    if (res instanceof Error) {
+      this.setNewRes([]);
+    } else {
+      this.setNewRes(res.results);
+    }
 
     const queryArg = queryArgs.find((value) => value.includes('name='));
     if (queryArg) this.setNewSerchRequest(queryArg.replace('name=', ''));
-
-    this.setState({ isLoading: false });
   };
 
   setNewRes = (newRes: IResponse[]) => {

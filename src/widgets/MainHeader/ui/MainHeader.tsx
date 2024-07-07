@@ -21,13 +21,13 @@ export default class MainHeader extends Component {
   }
 
   render() {
-    const { lastInputValue } = this.context as CardContextType;
+    const lastInputValue = UseLocalStorage.getInstance().load('searchRequest');
 
     return (
       <header className="flex min-h-20 w-full flex-col justify-center gap-5 px-4 py-2 md:px-10">
         <HeaderSearchBar
           onSearch={this.onSearch}
-          value={lastInputValue}
+          value={lastInputValue ? String(lastInputValue) : ''}
         />
         <ErrorButton />
       </header>
