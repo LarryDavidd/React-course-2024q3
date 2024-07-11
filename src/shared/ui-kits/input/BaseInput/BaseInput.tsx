@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 type InputProps = {
   onChange: (text: string) => void;
@@ -15,24 +15,22 @@ type InputDetails = {
   value?: string;
 };
 
-class BaseInput extends Component<InputProps> {
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.onChange(event.target.value);
+const BaseInput: React.FC<InputProps> = ({ onChange, inputDetails }) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
   };
 
-  render() {
-    return (
-      <input
-        id={this.props.inputDetails.id ?? 'default-search'}
-        type={this.props.inputDetails.type ?? 'text'}
-        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        placeholder={this.props.inputDetails.placeholder ?? 'text...'}
-        required={this.props.inputDetails.required ?? false}
-        value={this.props.inputDetails.value}
-        onChange={this.handleInputChange}
-      />
-    );
-  }
-}
+  return (
+    <input
+      id={inputDetails.id ?? 'default-search'}
+      type={inputDetails.type ?? 'text'}
+      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+      placeholder={inputDetails.placeholder ?? 'text...'}
+      required={inputDetails.required ?? false}
+      value={inputDetails.value}
+      onChange={handleInputChange}
+    />
+  );
+};
 
 export default BaseInput;
