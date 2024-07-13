@@ -1,4 +1,4 @@
-import { Component, createContext, ReactNode } from 'react';
+import React, { createContext, ReactNode, useState } from 'react';
 import getCardsInfo from '../api/getCardsInfo';
 import { IResponse } from '@shared/types/types';
 import { UseLocalStorage } from '@shared/lib';
@@ -15,75 +15,46 @@ type CardContextProps = {
   children?: ReactNode;
 };
 
-type CardContextState = {
-  lastInputValue: string;
-  res: IResponse[];
-  isLoading: boolean;
-};
-
 const CardContext = createContext<CardContextType | undefined>(undefined);
 
-class DataProvider extends Component<CardContextProps, CardContextState> {
-  constructor(props: CardContextProps) {
-    super(props);
+const DataProvider: React.FC<CardContextProps> = ({ children }) => {
+  const [lastInputValue, setLastInputValue] = useState<string>('');
+  const [res, setRes] = useState<IResponse[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    this.state = {
-      lastInputValue: '',
-      res: [],
-      isLoading: true
-    };
-  }
-
-  requestCardInfo = async (queryArgs: string[]) => {
-    this.setState({ isLoading: true });
+  const requestCardInfo = async (queryArgs: string[]) => {
+    setIsLoading(true);
     const res = await getCardsInfo(queryArgs);
-    this.setState({ isLoading: false });
 
     if (res instanceof Error) {
-      this.setNewRes([]);
+      setRes([]);
     } else {
-      this.setNewRes(res.results);
+      setRes(res.results);
     }
 
     const queryArg = queryArgs.find((value) => value.includes('name='));
-    if (queryArg) this.setNewSerchRequest(queryArg.replace('name=', ''));
+    if (queryArg) setNewSerchRequest(queryArg.replace('name=', ''));
+    setIsLoading(false);
   };
 
-  setNewRes = (newRes: IResponse[]) => {
-    this.setState({
-      res: newRes
-    });
-  };
-
-  setNewSerchRequest = (newSearchRequest: string) => {
-    this.setState({ lastInputValue: newSearchRequest });
+  const setNewSerchRequest = (newSearchRequest: string) => {
+    setLastInputValue(newSearchRequest);
     UseLocalStorage.getInstance().set('searchRequest', newSearchRequest);
   };
 
-  setLoading = (isLoading: boolean) => {
-    this.setState({
-      isLoading
-    });
-  };
-
-  render() {
-    const { res, isLoading, lastInputValue } = this.state;
-    const { children } = this.props;
-
-    return (
-      <CardContext.Provider
-        value={{
-          lastInputValue,
-          res,
-          isLoading,
-          requestCardInfo: this.requestCardInfo,
-          setLoading: this.setLoading
-        }}
-      >
-        {children}
-      </CardContext.Provider>
-    );
-  }
-}
+  return (
+    <CardContext.Provider
+      value={{
+        lastInputValue,
+        res,
+        isLoading,
+        requestCardInfo,
+        setLoading: setIsLoading
+      }}
+    >
+      {children}
+    </CardContext.Provider>
+  );
+};
 
 export { CardContext, DataProvider };

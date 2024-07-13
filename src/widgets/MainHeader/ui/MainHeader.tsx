@@ -13,13 +13,14 @@ const MainHeader: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log('useEffect');
     const value = UseLocalStorage.getInstance().load('searchRequest');
     if (value) {
       requestCardInfo([`name=${String(value)}`]);
     } else {
       requestCardInfo([]);
     }
-  }, [requestCardInfo]);
+  }, []);
 
   const lastInputValue = UseLocalStorage.getInstance().load('searchRequest');
 
