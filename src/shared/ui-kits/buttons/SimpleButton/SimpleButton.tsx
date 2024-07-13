@@ -1,11 +1,11 @@
 import React from 'react';
 
-type ButtonProps = {
+export type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonDetails: ButtonDetails;
 };
 
-type ButtonDetails = {
+export type ButtonDetails = {
   name: string;
   type?: 'button' | 'reset' | 'submit';
   isLoading?: boolean;

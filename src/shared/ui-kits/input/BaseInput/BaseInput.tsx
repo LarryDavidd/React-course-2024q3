@@ -1,11 +1,11 @@
 import React from 'react';
 
-type InputProps = {
+export type InputProps = {
   onChange: (text: string) => void;
   inputDetails: InputDetails;
 };
 
-type InputDetails = {
+export type InputDetails = {
   id?: string;
   placeholder?: string;
   type?: 'text' | 'password' | 'phone' | 'email' | 'number' | 'search';
@@ -28,6 +28,7 @@ const BaseInput: React.FC<InputProps> = ({ onChange, inputDetails }) => {
       placeholder={inputDetails.placeholder ?? 'text...'}
       required={inputDetails.required ?? false}
       value={inputDetails.value}
+      disabled={inputDetails.disabled}
       onChange={handleInputChange}
     />
   );

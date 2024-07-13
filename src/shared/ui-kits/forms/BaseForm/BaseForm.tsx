@@ -6,7 +6,14 @@ type FormProps = {
 };
 
 const Form: FC<FormProps> = ({ onSubmit, children }) => {
-  return <form onSubmit={onSubmit}>{children}</form>;
+  return (
+    <form
+      role="form"
+      onSubmit={onSubmit}
+    >
+      {children}
+    </form>
+  );
 };
 
 export default Form;
