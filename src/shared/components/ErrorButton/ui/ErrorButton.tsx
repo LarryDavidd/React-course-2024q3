@@ -1,35 +1,23 @@
-import { Component } from 'react';
-
+import React, { useState } from 'react';
 import { SimpleButton } from '@shared/ui-kits/buttons';
 
-type ErrorButtonState = {
-  isError: boolean;
-};
+const ErrorButton: React.FC = () => {
+  const [isError, setIsError] = useState(false);
 
-export default class ErrorButton extends Component<object, ErrorButtonState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      isError: false
-    };
-  }
-
-  throwError = () => {
-    this.setState({ isError: true });
+  const throwError = () => {
+    setIsError(true);
   };
 
-  render() {
-    const { isError } = this.state;
-
-    if (isError) {
-      throw new Error('Something went wrong!');
-    }
-
-    return (
-      <SimpleButton
-        onClick={this.throwError}
-        buttonDetails={{ name: 'Error' }}
-      />
-    );
+  if (isError) {
+    throw new Error('Something went wrong!');
   }
-}
+
+  return (
+    <SimpleButton
+      onClick={throwError}
+      buttonDetails={{ name: 'Error' }}
+    />
+  );
+};
+
+export default ErrorButton;
