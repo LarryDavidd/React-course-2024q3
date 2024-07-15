@@ -5,7 +5,7 @@ type ItemListProps = {
 };
 
 const ItemList: React.FC<ItemListProps> = ({ children }) => {
-  return <div className="flex flex-wrap justify-center gap-24">{children}</div>;
+  return <div className="flex flex-1 flex-wrap justify-center gap-24">{children}</div>;
 };
 
 export default ItemList;

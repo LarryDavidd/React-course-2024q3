@@ -1,4 +1,4 @@
-export type IResponse = {
+export interface IResponse {
   id: number;
   name: string;
   status: string;
@@ -8,8 +8,12 @@ export type IResponse = {
   location: {
     name: string;
   };
-};
+}
 
-export type IResult = {
+export interface IResult {
   results: IResponse[];
-};
+}
+
+export interface ISingleResult {
+  results: IResponse;
+}
