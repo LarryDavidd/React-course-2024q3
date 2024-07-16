@@ -6,7 +6,7 @@ import { ItemList } from '@entities/Cards';
 import { PageSpinner } from '@shared/ui-kits/spinner';
 import NotFoundSection from '@shared/ui-kits/sections';
 import { IResponse } from '@shared/types/types';
-import { UseLocalStorage } from '@shared/lib';
+import { useLocalStorage } from '@shared/lib';
 import { Pagination } from '@/shared/ui-kits/navigation';
 
 const MainPage: React.FC = () => {
@@ -16,6 +16,8 @@ const MainPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
 
+  const localStorage = useLocalStorage();
+
   useEffect(() => {
     const pageCurrent = searchParams.get('page');
     if (pageCurrent) {
@@ -24,7 +26,7 @@ const MainPage: React.FC = () => {
       setSearchParams({ page: String(currentPage) });
     }
 
-    const value = UseLocalStorage.getInstance().load('searchRequest');
+    const value = localStorage.load('searchRequest');
     if (value) {
       requestCardInfo([`name=${String(value)}`], Number(pageCurrent));
     } else {

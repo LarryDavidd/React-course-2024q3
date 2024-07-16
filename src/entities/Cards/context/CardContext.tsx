@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useState } from 'react';
 import getCardsInfo from '../api/getCardsInfo';
 import getSingleCardsInfo from '../api/getSingleCardIndo';
 import { IResponse } from '@shared/types/types';
-import { UseLocalStorage } from '@shared/lib';
+import { useLocalStorage } from '@shared/lib';
 
 export type CardContextType = {
   lastInputValue: string;
@@ -35,6 +35,8 @@ const DataProvider: React.FC<CardContextProps> = ({ children }) => {
   const [isSingleLoading, setIsSingleLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pagesCount, setPagesCount] = useState<number>(1);
+
+  const localStorage = useLocalStorage();
 
   const requestGetNextPage = async () => {
     setIsLoading(true);
@@ -95,7 +97,7 @@ const DataProvider: React.FC<CardContextProps> = ({ children }) => {
 
   const setNewSerchRequest = (newSearchRequest: string) => {
     setLastInputValue(newSearchRequest);
-    UseLocalStorage.getInstance().set('searchRequest', newSearchRequest);
+    localStorage.set('searchRequest', newSearchRequest);
   };
 
   return (

@@ -1,34 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import getCardsInfo from './getCardsInfo';
-import { config } from '@shared/api/config/config';
-
-describe('getCardsInfo', () => {
-  let mock: MockAdapter;
-
-  beforeEach(() => {
-    mock = new MockAdapter(axios);
-  });
-
-  afterEach(() => {
-    mock.restore();
-  });
-
-  it('should return data when the response is successful', async () => {
-    const queryArgs = ['name=Rick'];
-    const offset = 1;
-    const limit = 10;
-    const apiUrl = `${config.baseUrl}/?count=${limit}&page=${offset}&name=test`;
-
-    mock.onGet(apiUrl).reply(200, mockData);
-
-    const result = await getCardsInfo(queryArgs, offset, limit);
-    expect(result).toEqual(mockData);
-  });
-});
-
-const mockData = {
+export const reqestMockData = {
   info: {
     count: 107,
     pages: 6,
