@@ -17,22 +17,22 @@ const MainPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (!searchParams.has('page')) {
-      setSearchParams({ page: String(currentPage) });
+    const pageCurrent = searchParams.get('page');
+    if (pageCurrent) {
+      setCurrentPage(Number(pageCurrent));
     } else {
-      setCurrentPage(Number(searchParams.get('page')));
+      setSearchParams({ page: String(currentPage) });
     }
 
     const value = UseLocalStorage.getInstance().load('searchRequest');
     if (value) {
-      requestCardInfo([`name=${String(value)}`], currentPage);
+      requestCardInfo([`name=${String(value)}`], Number(pageCurrent));
     } else {
-      requestCardInfo([], currentPage);
+      requestCardInfo([], Number(pageCurrent));
     }
   }, [searchParams]);
 
   const setNewCurrentPage = (number: number) => {
-    console.log(number, pagesCount);
     if (number > 0 && number <= pagesCount) {
       setSearchParams({ page: String(number) });
     }

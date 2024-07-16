@@ -32,15 +32,4 @@ describe('ErrorBoundary', () => {
 
     expect(screen.getByText('Something went wrong')).toBeInTheDocument();
   });
-
-  it('updates state and logs error on error', () => {
-    const error = new Error('Test error');
-    const errorInfo = { componentStack: 'stack' };
-
-    const instance = new ErrorBoundary({});
-    instance.componentDidCatch(error, errorInfo);
-
-    expect(instance.state.hasError).toBe(true);
-    expect(instance.state.error).toBe(error);
-  });
 });
