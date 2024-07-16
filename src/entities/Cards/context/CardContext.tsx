@@ -10,10 +10,15 @@ export type CardContextType = {
   singleRes: IResponse | null;
   isLoading: boolean;
   isSingleLoading: boolean;
-  requestCardInfo: (newData: string[]) => void;
+  currentPage: number;
+  pagesCount: number;
+  requestCardInfo: (newData: string[], currentPage?: number | undefined) => void;
   requestSingleCardInfo: (id: string) => void;
   setIsLoading: (newData: boolean) => void;
   setIsSingleLoading: (newData: boolean) => void;
+  setCurrentPage: (currentPage: number) => void;
+  requestGetNextPage: () => void;
+  requestGetPrevPage: () => void;
 };
 
 type CardContextProps = {
@@ -28,15 +33,46 @@ const DataProvider: React.FC<CardContextProps> = ({ children }) => {
   const [singleRes, setSingleRes] = useState<IResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isSingleLoading, setIsSingleLoading] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pagesCount, setPagesCount] = useState<number>(1);
 
-  const requestCardInfo = async (queryArgs: string[]) => {
+  const requestGetNextPage = async () => {
     setIsLoading(true);
-    const res = await getCardsInfo(queryArgs);
+    const res = await getCardsInfo([`name=${lastInputValue}`], currentPage);
 
     if (res instanceof Error) {
       setRes([]);
     } else {
       setRes(res.results);
+    }
+
+    setIsLoading(false);
+  };
+
+  const requestGetPrevPage = async () => {
+    if (currentPage > 1) {
+      setIsLoading(true);
+      const res = await getCardsInfo([`name=${lastInputValue}`], currentPage);
+
+      if (res instanceof Error) {
+        setRes([]);
+      } else {
+        setRes(res.results);
+      }
+
+      setIsLoading(false);
+    }
+  };
+
+  const requestCardInfo = async (queryArgs: string[], currentPage: number | undefined = undefined) => {
+    setIsLoading(true);
+    const res = await getCardsInfo(queryArgs, currentPage);
+
+    if (res instanceof Error) {
+      setRes([]);
+    } else {
+      setRes(res.results);
+      setPagesCount(res.info.pages);
     }
 
     const queryArg = queryArgs.find((value) => value.includes('name='));
@@ -51,7 +87,6 @@ const DataProvider: React.FC<CardContextProps> = ({ children }) => {
     if (res instanceof Error) {
       setSingleRes(null);
     } else {
-      console.log(res);
       setSingleRes(res);
     }
 
@@ -71,10 +106,15 @@ const DataProvider: React.FC<CardContextProps> = ({ children }) => {
         singleRes,
         isLoading,
         isSingleLoading,
+        currentPage,
+        pagesCount,
         requestCardInfo,
         requestSingleCardInfo,
         setIsLoading,
-        setIsSingleLoading
+        setIsSingleLoading,
+        setCurrentPage,
+        requestGetNextPage,
+        requestGetPrevPage
       }}
     >
       {children}

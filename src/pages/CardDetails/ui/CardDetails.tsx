@@ -1,9 +1,9 @@
 import { CardContext, CardContextType, Item } from '@entities/Cards';
-import { PageSpinner } from '@shared/ui-kits/spinner';
 import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NotFoundSection from '@/shared/ui-kits/sections';
-import { CloseButton } from '@/shared/ui-kits/buttons';
+import { PageSpinner } from '@shared/ui-kits/spinner';
+import NotFoundSection from '@shared/ui-kits/sections';
+import { CloseButton } from '@shared/ui-kits/buttons';
 
 const CardDetails: React.FC = () => {
   const context = useContext<CardContextType | undefined>(CardContext);

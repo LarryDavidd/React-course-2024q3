@@ -12,6 +12,9 @@ export interface IResponse {
 
 export interface IResult {
   results: IResponse[];
+  info: {
+    pages: number;
+  };
 }
 
 export interface ISingleResult {

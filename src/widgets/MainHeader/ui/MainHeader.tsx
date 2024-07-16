@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import HeaderSearchBar from '@features/HeaderSearchBar';
 import { CardContext, CardContextType } from '@entities/Cards/context/CardContext';
 import { UseLocalStorage } from '@shared/lib';
@@ -11,15 +11,6 @@ const MainHeader: React.FC = () => {
   const onSearch = (text: string) => {
     requestCardInfo([`name=${text}`]);
   };
-
-  useEffect(() => {
-    const value = UseLocalStorage.getInstance().load('searchRequest');
-    if (value) {
-      requestCardInfo([`name=${String(value)}`]);
-    } else {
-      requestCardInfo([]);
-    }
-  }, []);
 
   const lastInputValue = UseLocalStorage.getInstance().load('searchRequest');
 
