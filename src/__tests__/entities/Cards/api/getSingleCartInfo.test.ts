@@ -20,10 +20,10 @@ describe('getSingleCardsInfo', () => {
     const id = '1';
     const apiUrl = `${config.baseUrl}/${id}`;
 
-    mock.onGet(apiUrl).reply(200, reqestMockData);
+    mock.onGet(apiUrl).reply(200, reqestMockData.results[0]);
 
     const result = await getSingleCardsInfo(id);
-    expect(result).toEqual(reqestMockData);
+    expect(result).toEqual(reqestMockData.results[0]);
   });
 
   it('should return error when the response is not successful', async () => {

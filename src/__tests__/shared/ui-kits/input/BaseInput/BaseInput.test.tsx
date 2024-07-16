@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import BaseInput, { InputDetails } from './BaseInput';
+import BaseInput, { InputDetails } from '@shared/ui-kits/input/BaseInput/BaseInput';
 
 describe('BaseInput', () => {
   it('renders input with correct default values', () => {

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '@shared/components/ErrorBoundary/ui/ErrorBoundary';
 
 vi.mock('../components/ErrorBlock', () => ({
   __esModule: true,
@@ -30,6 +30,6 @@ describe('ErrorBoundary', () => {
       </ErrorBoundary>
     );
 
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
+    expect(screen.getByText("Something's missing.")).toBeInTheDocument();
   });
 });

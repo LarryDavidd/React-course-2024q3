@@ -2,9 +2,9 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import SearchBar from './SearchBar';
-import { ButtonProps } from '../../buttons/SimpleButton/SimpleButton';
-import { InputProps } from '../BaseInput/BaseInput';
+import SearchBar from '@shared/ui-kits/input/SearchBar/SearchBar';
+import { ButtonProps } from '@shared/ui-kits/buttons/SimpleButton/SimpleButton';
+import { InputProps } from '@shared/ui-kits/input/BaseInput/BaseInput';
 import { FormProps } from 'react-router-dom';
 
 vi.mock('@shared/ui-kits/input', () => ({
