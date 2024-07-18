@@ -1,3 +1,3 @@
-import UseLocalStorage from './composables/useLocalStorageClass';
+import useLocalStorage from './composables/useLocalStorage';
 
-export { UseLocalStorage };
+export { useLocalStorage };

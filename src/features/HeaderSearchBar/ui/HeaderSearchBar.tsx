@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BaseInput } from '@shared/ui-kits/input';
 import { SimpleButton } from '@shared/ui-kits/buttons';
 import { BaseForm } from '@shared/ui-kits/forms';
@@ -8,38 +8,33 @@ type SearchBarProps = {
   value?: string;
 };
 
-type SearchBarState = {
-  query: string;
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, value = '' }) => {
+  const [query, setQuery] = useState(value);
+
+  useEffect(() => {
+    setQuery(value);
+  }, [value]);
+
+  const handleInputChange = (text: string) => {
+    setQuery(text);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSearch(query);
+  };
+
+  return (
+    <BaseForm onSubmit={handleSubmit}>
+      <div className="flex gap-2">
+        <BaseInput
+          onChange={handleInputChange}
+          inputDetails={{ value: query }}
+        />
+        <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
+      </div>
+    </BaseForm>
+  );
 };
 
-export default class SearchBar extends Component<SearchBarProps, SearchBarState> {
-  constructor(props: SearchBarProps) {
-    super(props);
-    this.state = {
-      query: props.value ? props.value : ''
-    };
-  }
-
-  handleInputChange = (text: string) => {
-    this.setState({ query: text });
-  };
-
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    this.props.onSearch(this.state.query);
-  };
-
-  render() {
-    return (
-      <BaseForm onSubmit={this.handleSubmit}>
-        <div className="flex gap-2">
-          <BaseInput
-            onChange={this.handleInputChange}
-            inputDetails={{ value: this.state.query }}
-          />
-          <SimpleButton buttonDetails={{ name: 'search', type: 'submit' }} />
-        </div>
-      </BaseForm>
-    );
-  }
-}
+export default SearchBar;

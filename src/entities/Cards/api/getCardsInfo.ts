@@ -2,7 +2,7 @@ import { IResult } from '@shared/types/types';
 import { axiosInstance } from '@shared/api/axiosInstance';
 import { config } from '@shared/api/config/config';
 
-async function getCardsInfo(queryArgs: string[] = [], limit = 10, offset = 1) {
+async function getCardsInfo(queryArgs: string[] = [], offset = 1, limit = 10) {
   if (offset < 1) offset = 1;
   const baseUrl = config.baseUrl + '/?' + `count=${limit}` + '&' + `page=${offset}`;
   const apiUrl = queryArgs.reduce((accum, value) => accum + '&' + value, baseUrl);

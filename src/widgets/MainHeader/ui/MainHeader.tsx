@@ -1,38 +1,30 @@
-import { Component } from 'react';
+import React, { useContext } from 'react';
 import HeaderSearchBar from '@features/HeaderSearchBar';
 import { CardContext, CardContextType } from '@entities/Cards/context/CardContext';
-import { UseLocalStorage } from '@shared/lib';
+import { useLocalStorage } from '@shared/lib';
 import ErrorButton from '@shared/components/ErrorButton';
 
-export default class MainHeader extends Component {
-  onSearch = (text: string) => {
-    const { requestCardInfo } = this.context as CardContextType;
+const MainHeader: React.FC = () => {
+  const context = useContext(CardContext);
+  const { requestCardInfo } = context as CardContextType;
+
+  const localStorage = useLocalStorage();
+
+  const onSearch = (text: string) => {
     requestCardInfo([`name=${text}`]);
   };
 
-  componentDidMount() {
-    const { requestCardInfo } = this.context as CardContextType;
-    const value = UseLocalStorage.getInstance().load('searchRequest');
-    if (value) {
-      requestCardInfo([`name=${String(value)}`]);
-    } else {
-      requestCardInfo([]);
-    }
-  }
+  const lastInputValue = localStorage.load('searchRequest');
 
-  render() {
-    const lastInputValue = UseLocalStorage.getInstance().load('searchRequest');
+  return (
+    <header className="flex min-h-20 w-full flex-col justify-center gap-5 px-4 py-2 md:px-10">
+      <HeaderSearchBar
+        onSearch={onSearch}
+        value={lastInputValue ? String(lastInputValue) : ''}
+      />
+      <ErrorButton />
+    </header>
+  );
+};
 
-    return (
-      <header className="flex min-h-20 w-full flex-col justify-center gap-5 px-4 py-2 md:px-10">
-        <HeaderSearchBar
-          onSearch={this.onSearch}
-          value={lastInputValue ? String(lastInputValue) : ''}
-        />
-        <ErrorButton />
-      </header>
-    );
-  }
-}
-
-MainHeader.contextType = CardContext;
+export default MainHeader;
