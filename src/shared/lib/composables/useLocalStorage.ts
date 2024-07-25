@@ -1,4 +1,4 @@
-const useLocalStorage = () => {
+const UseLocalStorage = () => {
   const set = <T>(key: string, data: T) => {
     localStorage.setItem(key, JSON.stringify(data));
   };
@@ -17,4 +17,4 @@ const useLocalStorage = () => {
   return { set, load, remove };
 };
 
-export default useLocalStorage;
+export default UseLocalStorage;

@@ -6,8 +6,10 @@ import { ItemList } from '@entities/Cards';
 import { PageSpinner } from '@shared/ui-kits/spinner';
 import NotFoundSection from '@shared/ui-kits/sections';
 import { IResponse } from '@shared/types/types';
-import { useLocalStorage } from '@shared/lib';
+import { UseLocalStorage } from '@shared/lib';
 import { Pagination } from '@/shared/ui-kits/navigation';
+import { useGetCardsInfoQuery } from '@/entities/Cards/api/cardApi';
+import { MainHeader } from '@/widgets/MainHeader';
 
 const MainPage: React.FC = () => {
   const context = useContext<CardContextType | undefined>(CardContext);
@@ -15,10 +17,12 @@ const MainPage: React.FC = () => {
   const { requestCardInfo, pagesCount } = context as CardContextType;
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const { data, isFetching } = useGetCardsInfoQuery(2);
 
-  const localStorage = useLocalStorage();
+  const localStorage = UseLocalStorage();
 
   useEffect(() => {
+    console.log(data, isFetching);
     const pageCurrent = searchParams.get('page');
     if (pageCurrent) {
       setCurrentPage(Number(pageCurrent));
@@ -48,6 +52,7 @@ const MainPage: React.FC = () => {
     if (context && context?.res.length > 0) {
       return (
         <>
+          <MainHeader />
           <div className="m-6 flex justify-center">
             <Pagination
               onClick={setNewCurrentPage}
