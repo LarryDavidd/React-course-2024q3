@@ -3,6 +3,8 @@ import HeaderSearchBar from '@features/HeaderSearchBar';
 import { UseLocalStorage } from '@shared/lib';
 import ErrorButton from '@shared/components/ErrorButton';
 import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
+import { SimpleButton } from '@/shared/ui-kits/buttons';
+import { useTheme } from '@/shared/context/themeProvider';
 
 const MainHeader: React.FC = () => {
   const { getAllCards } = useCardSearch();
@@ -13,6 +15,8 @@ const MainHeader: React.FC = () => {
     getAllCards(text);
   };
 
+  const theme = useTheme();
+
   const lastInputValue = localStorage.load('searchRequest');
 
   return (
@@ -22,6 +26,10 @@ const MainHeader: React.FC = () => {
         value={lastInputValue ? String(lastInputValue) : ''}
       />
       <ErrorButton />
+      <SimpleButton
+        buttonDetails={{ name: 'swith theme' }}
+        onClick={theme.toggleTheme}
+      />
     </header>
   );
 };
