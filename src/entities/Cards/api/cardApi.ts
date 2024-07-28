@@ -1,4 +1,4 @@
-import { IResult } from '@shared/types/types';
+import { IResponse, IResult } from '@shared/types/types';
 import { config } from '@shared/api/config/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -15,9 +15,9 @@ export const cardApi = createApi({
       query: ({ page, inputValue }) => `/?page=${page ?? ''}&name=${inputValue ?? ''}`,
       transformResponse: (response: IResult) => response
     }),
-    searchCard: builder.query<IResult, string>({
-      query: (value: string) => `/${value}`,
-      transformResponse: (response: IResult) => response
+    searchCard: builder.query<IResponse, string>({
+      query: (id: string) => id,
+      transformResponse: (response: IResponse) => response
     })
   })
 });

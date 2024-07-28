@@ -6,13 +6,13 @@ import { PageSpinner } from '@shared/ui-kits/spinner';
 import NotFoundSection from '@shared/ui-kits/sections';
 import { IResponse } from '@shared/types/types';
 import { UseLocalStorage } from '@shared/lib';
-import { Pagination } from '@/shared/ui-kits/navigation';
-import { MainHeader } from '@/widgets/MainHeader';
-import { setCurrentPage, setData, setLoadingCards, setSaveText } from '@/entities/Cards/slice/search.slice';
-import useAppDispatch from '@/app/store/hooks/useAppDispatch';
-import useAppSelector from '@/app/store/hooks/useAppSelector';
-import { useGetCardsInfoQuery } from '@/entities/Cards/api/cardApi';
-import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/shared/constants/constats';
+import { Pagination } from '@shared/ui-kits/navigation';
+import { MainHeader } from '@widgets/MainHeader';
+import { setCurrentPage, setData, setLoadingCards, setSaveText } from '@entities/Cards/slice/search.slice';
+import useAppDispatch from '@app/store/hooks/useAppDispatch';
+import useAppSelector from '@app/store/hooks/useAppSelector';
+import { useGetCardsInfoQuery } from '@entities/Cards/api/cardApi';
+import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@shared/constants/constats';
 import { Dispatch } from '@reduxjs/toolkit';
 
 const myThunk = (inputValue: string, currentPage: number) => (dispatch: Dispatch) => {
