@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BaseInput } from '@shared/ui-kits/input';
 import { SimpleButton } from '@shared/ui-kits/buttons';
 import { BaseForm } from '@shared/ui-kits/forms';
-import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
@@ -11,7 +10,6 @@ type SearchBarProps = {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, value = '' }) => {
   const [query, setQuery] = useState(value);
-  const { getAllCards } = useCardSearch(query);
 
   useEffect(() => {
     setQuery(value);
@@ -23,7 +21,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, value = '' }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getAllCards();
     onSearch(query);
   };
 

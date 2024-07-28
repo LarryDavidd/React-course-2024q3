@@ -1,18 +1,23 @@
-import { IResponse } from '@shared/types/types';
+import { IResult } from '@shared/types/types';
 import { config } from '@shared/api/config/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+type CardQueryParams = {
+  inputValue?: string;
+  page?: number | string;
+};
 
 export const cardApi = createApi({
   reducerPath: 'data',
   baseQuery: fetchBaseQuery({ baseUrl: config.baseUrl }),
   endpoints: (builder) => ({
-    getCardsInfo: builder.query<IResponse[], number>({
-      query: (value: number) => `/?page=${value}`,
-      transformResponse: (response: IResponse[]) => response
+    getCardsInfo: builder.query<IResult, CardQueryParams>({
+      query: ({ page, inputValue }) => `/?page=${page ?? ''}&name=${inputValue ?? ''}`,
+      transformResponse: (response: IResult) => response
     }),
-    searchCard: builder.query<IResponse, string>({
+    searchCard: builder.query<IResult, string>({
       query: (value: string) => `/${value}`,
-      transformResponse: (response: IResponse) => response
+      transformResponse: (response: IResult) => response
     })
   })
 });

@@ -6,20 +6,33 @@ const initialState = {
   cardsInfo: [],
   inputValue: '',
   currentPage: DEFAULT_PAGE,
-  isLoadingCharacters: false,
-  isLoadingSingleCharacter: false
+  isLoadingCards: false,
+  isLoadingSingleCard: false
 };
 
 const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
+    setData: (state, action) => {
+      state.cardsInfo = action.payload;
+    },
     setSaveText: (state, action) => {
+      console.log(action);
       state.inputValue = action.payload;
+    },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+    setLoadingCards: (state, action) => {
+      state.isLoadingCards = action.payload;
+    },
+    setLoadingCard: (state, action) => {
+      state.isLoadingSingleCard = action.payload;
     }
   }
 });
 
-export const { setSaveText } = searchSlice.actions;
+export const { setData, setSaveText, setLoadingCard, setLoadingCards, setCurrentPage } = searchSlice.actions;
 
 export default searchSlice.reducer;
