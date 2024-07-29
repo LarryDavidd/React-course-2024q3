@@ -38,7 +38,7 @@ const MainHeader: React.FC = () => {
       />
       <ErrorButton />
       <SimpleButton
-        buttonDetails={{ name: 'swith theme' }}
+        buttonDetails={{ name: 'switch theme' }}
         onClick={theme.toggleTheme}
       />
 
