@@ -1,9 +1,11 @@
+import favoriteSlice from '@/features/favorites/favorite.slice';
 import { cardApi, searchSlice } from '@entities/Cards';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
   searchSlice,
+  favoriteSlice,
   [cardApi.reducerPath]: cardApi.reducer
 });
 

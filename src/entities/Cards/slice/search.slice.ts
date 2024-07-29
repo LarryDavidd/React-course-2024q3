@@ -18,7 +18,6 @@ const searchSlice = createSlice({
       state.cardsInfo = action.payload;
     },
     setSaveText: (state, action) => {
-      console.log(action);
       state.inputValue = action.payload;
     },
     setCurrentPage: (state, action) => {
