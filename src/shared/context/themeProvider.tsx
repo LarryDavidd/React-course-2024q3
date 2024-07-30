@@ -12,10 +12,11 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>('light');
+  const [theme, setTheme] = useState<string>('dark');
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    document.querySelector('html')!.setAttribute('class', theme)!;
     document.querySelector('html')!.setAttribute('data-theme', theme)!;
   };
 

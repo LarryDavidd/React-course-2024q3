@@ -20,7 +20,7 @@ const FavoritesModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-x-0 h-min w-fit md:inset-0">
+    <div className="fixed inset-y-1/2 h-min w-fit">
       <div className="relative max-h-full w-fit p-4">
         <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Favorites</h3>

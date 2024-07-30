@@ -23,5 +23,3 @@ export const cardApi = createApi({
 });
 
 export const { useGetCardsInfoQuery, useSearchCardQuery } = cardApi;
-
-// export const { getCardsInfo, searchCard } = cardApi.endpoints;
