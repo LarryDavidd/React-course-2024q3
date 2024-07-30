@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from '@/shared/context/themeProvider';
 import { describe, expect, it } from 'vitest';
 
-// Создадим компонент для тестирования использования контекста
 const TestComponent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   return (
@@ -23,7 +22,7 @@ describe('ThemeProvider', () => {
       </ThemeProvider>
     );
 
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
   });
 
   it('should toggle theme between light and dark', () => {
@@ -35,14 +34,14 @@ describe('ThemeProvider', () => {
 
     const toggleButton = screen.getByText('Toggle Theme');
 
-    expect(screen.getByTestId('theme')).toHaveTextContent('light');
-
-    fireEvent.click(toggleButton);
-
     expect(screen.getByTestId('theme')).toHaveTextContent('dark');
 
     fireEvent.click(toggleButton);
 
     expect(screen.getByTestId('theme')).toHaveTextContent('light');
+
+    fireEvent.click(toggleButton);
+
+    expect(screen.getByTestId('theme')).toHaveTextContent('dark');
   });
 });
