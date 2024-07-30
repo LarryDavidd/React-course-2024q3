@@ -1,18 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderSearchBar from '@features/HeaderSearchBar';
-import { CardContext, CardContextType } from '@entities/Cards/context/CardContext';
-import { useLocalStorage } from '@shared/lib';
+import { UseLocalStorage } from '@shared/lib';
 import ErrorButton from '@shared/components/ErrorButton';
+import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
+import { SimpleButton } from '@/shared/ui-kits/buttons';
+import { useTheme } from '@/shared/context/themeProvider';
+import FavoritesModal from '@/widgets/FavoritesModal/ui/FavoritesModal';
+import useAppSelector from '@/app/store/hooks/useAppSelector';
 
 const MainHeader: React.FC = () => {
-  const context = useContext(CardContext);
-  const { requestCardInfo } = context as CardContextType;
+  const { getAllCards } = useCardSearch();
 
-  const localStorage = useLocalStorage();
+  const localStorage = UseLocalStorage();
+
+  const { favorites } = useAppSelector((state) => state.favoriteSlice);
 
   const onSearch = (text: string) => {
-    requestCardInfo([`name=${text}`]);
+    getAllCards(text);
   };
+
+  const [isModalOpen, openCloseModal] = useState(false);
+
+  useEffect(() => {
+    if (favorites.length > 0) openCloseModal(true);
+    else openCloseModal(false);
+  }, [favorites.length]);
+
+  const theme = useTheme();
 
   const lastInputValue = localStorage.load('searchRequest');
 
@@ -23,6 +37,12 @@ const MainHeader: React.FC = () => {
         value={lastInputValue ? String(lastInputValue) : ''}
       />
       <ErrorButton />
+      <SimpleButton
+        buttonDetails={{ name: 'switch theme' }}
+        onClick={theme.toggleTheme}
+      />
+
+      {isModalOpen ? <FavoritesModal /> : null}
     </header>
   );
 };

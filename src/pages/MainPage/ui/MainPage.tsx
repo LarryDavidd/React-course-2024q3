@@ -1,53 +1,62 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
-import { CardContextType, CardContext } from '@entities/Cards';
 import { Item } from '@entities/Cards';
 import { ItemList } from '@entities/Cards';
 import { PageSpinner } from '@shared/ui-kits/spinner';
 import NotFoundSection from '@shared/ui-kits/sections';
 import { IResponse } from '@shared/types/types';
-import { useLocalStorage } from '@shared/lib';
-import { Pagination } from '@/shared/ui-kits/navigation';
+import { UseLocalStorage } from '@shared/lib';
+import { Pagination } from '@shared/ui-kits/navigation';
+import { MainHeader } from '@widgets/MainHeader';
+import { setCurrentPage, setData, setLoadingCards, setSaveText } from '@entities/Cards/slice/search.slice';
+import useAppDispatch from '@app/store/hooks/useAppDispatch';
+import useAppSelector from '@app/store/hooks/useAppSelector';
+import { useGetCardsInfoQuery } from '@entities/Cards/api/cardApi';
+import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@shared/constants/constats';
+import { Dispatch } from '@reduxjs/toolkit';
+
+const myThunk = (inputValue: string, currentPage: number) => (dispatch: Dispatch) => {
+  dispatch(setSaveText(inputValue));
+  dispatch(setCurrentPage(currentPage));
+};
 
 const MainPage: React.FC = () => {
-  const context = useContext<CardContextType | undefined>(CardContext);
+  const useLocalStorage = UseLocalStorage();
+  const dispatch = useAppDispatch();
   const { search } = useLocation();
-  const { requestCardInfo, pagesCount } = context as CardContextType;
   const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const localStorage = useLocalStorage();
+  const { inputValue, currentPage } = useAppSelector((state) => state.searchSlice);
+  const { data, isFetching } = useGetCardsInfoQuery(
+    {
+      inputValue,
+      page: currentPage
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
-    const pageCurrent = searchParams.get('page');
-    if (pageCurrent) {
-      setCurrentPage(Number(pageCurrent));
-    } else {
-      setSearchParams({ page: String(currentPage) });
-    }
+    dispatch(myThunk(useLocalStorage.load(LOCAL_STORAGE_KEY) ?? '', searchParams.has('page') ? Number(searchParams.get('page')) : DEFAULT_PAGE));
+  }, []);
 
-    const value = localStorage.load('searchRequest');
-    if (value) {
-      requestCardInfo([`name=${String(value)}`], Number(pageCurrent));
-    } else {
-      requestCardInfo([], Number(pageCurrent));
-    }
-  }, [searchParams]);
+  useEffect(() => {
+    dispatch(setData({ value: data?.results }));
+    dispatch(setLoadingCards({ value: isFetching }));
+  }, [data]);
 
   const setNewCurrentPage = (number: number) => {
-    if (number > 0 && number <= pagesCount) {
+    if (number > 0 && number <= (data?.info.pages ?? DEFAULT_PAGE)) {
       setSearchParams({ page: String(number) });
+      dispatch(setCurrentPage(number));
     }
   };
 
   const renderItems = () => {
-    if (context?.isLoading) {
+    if (isFetching) {
       return <PageSpinner />;
-    }
-
-    if (context && context?.res.length > 0) {
+    } else if (data) {
       return (
         <>
+          <MainHeader />
           <div className="m-6 flex justify-center">
             <Pagination
               onClick={setNewCurrentPage}
@@ -56,7 +65,7 @@ const MainPage: React.FC = () => {
           </div>
           <main className="flex">
             <ItemList>
-              {context.res.map((character: IResponse) => (
+              {data.results.map((character: IResponse) => (
                 <Link
                   key={character.id}
                   to={`/${character.id}${search}`}

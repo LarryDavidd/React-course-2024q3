@@ -1,14 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
 import router from './router/routes';
-import { MainHeader } from '@widgets/MainHeader';
-import { DataProvider } from '@entities/Cards';
+import { ThemeProvider } from '@/shared/context/themeProvider';
 
 const App = () => {
   return (
-    <DataProvider>
-      <MainHeader />
+    <ThemeProvider>
       <RouterProvider router={router} />
-    </DataProvider>
+    </ThemeProvider>
   );
 };
 
