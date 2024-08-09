@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import '@/components/app/styles/tailwind.scss';
 
 import ErrorBoundary from '@/components/shared/components/ErrorBoundary';
 import Providers from '@/components/app/store/Provider';

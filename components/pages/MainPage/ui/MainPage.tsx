@@ -14,8 +14,8 @@ import { Item, ItemList } from '@/components/entities/Cards';
 // };
 
 type MainPageProps = {
-  children: ReactNode;
   data?: IResult;
+  children?: ReactNode;
 };
 
 const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
@@ -47,14 +47,17 @@ const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
             <ItemList>
               {data.results.map((character: IResponse) => (
                 <Link
-                  href={`/${character.id}${router.asPath}`}
+                  href={{
+                    pathname: `/${character.id}`,
+                    query: { ...router.query }
+                  }}
                   key={character.id}
                 >
                   <Item character={character} />
                 </Link>
               ))}
             </ItemList>
-            {children}
+            {children ?? null}
           </main>
         </>
       );
