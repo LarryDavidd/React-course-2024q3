@@ -2,7 +2,10 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 function Document() {
   return (
-    <Html>
+    <Html
+      className="dark"
+      data-theme="dark"
+    >
       <Head />
       <body>
         <Main />
