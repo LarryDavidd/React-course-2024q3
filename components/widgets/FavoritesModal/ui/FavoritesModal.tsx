@@ -1,9 +1,9 @@
-import useAppDispatch from '@/components/app/store/hooks/useAppDispatch';
-import useAppSelector from '@/components/app/store/hooks/useAppSelector';
-import { Item } from '@/components/entities/Cards';
-import { clearFavorites } from '@/components/features/favorites/favorite.slice';
-import { IResponse } from '@/components/shared/types/types';
-import { SimpleButton } from '@/components/shared/ui-kits/buttons';
+import useAppDispatch from '@app/store/hooks/useAppDispatch';
+import useAppSelector from '@app/store/hooks/useAppSelector';
+import { Item } from '@entities/Cards';
+import { clearFavorites } from '@features/favorites/favorite.slice';
+import { IResponse } from '@shared/types/types';
+import { SimpleButton } from '@shared/ui-kits/buttons';
 import React from 'react';
 
 const FavoritesModal: React.FC = () => {

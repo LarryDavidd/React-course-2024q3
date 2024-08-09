@@ -1,9 +1,9 @@
 import React, { MouseEvent } from 'react';
-import { IResponse } from '@/components/shared/types/types';
-import { SimpleButton } from '@/components/shared/ui-kits/buttons';
-import useAppDispatch from '@/components/app/store/hooks/useAppDispatch';
-import { toggleItemInFavorite } from '@/components/features/favorites/favorite.slice';
-import useAppSelector from '@/components/app/store/hooks/useAppSelector';
+import { IResponse } from '@shared/types/types';
+import { SimpleButton } from '@shared/ui-kits/buttons';
+import useAppDispatch from '@app/store/hooks/useAppDispatch';
+import { toggleItemInFavorite } from '@features/favorites/favorite.slice';
+import useAppSelector from '@app/store/hooks/useAppSelector';
 
 type ItemProps = {
   character: IResponse;

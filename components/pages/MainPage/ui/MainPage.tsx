@@ -1,17 +1,12 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import { IResponse, IResult } from '@/components/shared/types/types';
+import { IResponse, IResult } from '@shared/types/types';
 import { useRouter } from 'next/router';
-import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
-import NotFoundSection from '@/components/shared/ui-kits/sections';
-import { MainHeader } from '@/components/widgets/MainHeader';
-import { Pagination } from '@/components/shared/ui-kits/navigation';
-import { Item, ItemList } from '@/components/entities/Cards';
-
-// const myThunk = (inputValue: string, currentPage: number) => (dispatch: Dispatch) => {
-//   dispatch(setSaveText(inputValue));
-//   dispatch(setCurrentPage(currentPage));
-// };
+import { DEFAULT_PAGE } from '@shared/constants/constats';
+import NotFoundSection from '@shared/ui-kits/sections';
+import { MainHeader } from '@widgets/MainHeader';
+import { Pagination } from '@shared/ui-kits/navigation';
+import { Item, ItemList } from '@entities/Cards';
 
 type MainPageProps = {
   data?: IResult;

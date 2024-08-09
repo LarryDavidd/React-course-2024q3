@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BaseInput } from '@/components/shared/ui-kits/input';
-import { SimpleButton } from '@/components/shared/ui-kits/buttons';
-import { BaseForm } from '@/components/shared/ui-kits/forms';
+import { BaseInput } from '@shared/ui-kits/input';
+import { SimpleButton } from '@shared/ui-kits/buttons';
+import { BaseForm } from '@shared/ui-kits/forms';
 
 type SearchBarProps = {
   onSearch: (query: string) => void;

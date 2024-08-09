@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SimpleButton } from '@/components/shared/ui-kits/buttons';
+import { SimpleButton } from '@shared/ui-kits/buttons';
 
 const ErrorButton: React.FC = () => {
   const [isError, setIsError] = useState(false);

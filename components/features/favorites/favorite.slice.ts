@@ -1,4 +1,4 @@
-import { IResponse } from '@/components/shared/types/types';
+import { IResponse } from '@shared/types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type FavoriteState = {

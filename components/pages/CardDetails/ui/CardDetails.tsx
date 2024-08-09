@@ -1,8 +1,8 @@
-import { Item } from '@/components/entities/Cards';
-import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
-import { IResponse } from '@/components/shared/types/types';
-import { CloseButton } from '@/components/shared/ui-kits/buttons';
-import NotFoundSection from '@/components/shared/ui-kits/sections';
+import { Item } from '@entities/Cards';
+import { DEFAULT_PAGE } from '@shared/constants/constats';
+import { IResponse } from '@shared/types/types';
+import { CloseButton } from '@shared/ui-kits/buttons';
+import NotFoundSection from '@shared/ui-kits/sections';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 

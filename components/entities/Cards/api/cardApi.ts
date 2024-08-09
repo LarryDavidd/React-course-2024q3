@@ -1,5 +1,5 @@
-import { config } from '@/components/shared/api/config/config';
-import { IResponse, IResult } from '@/components/shared/types/types';
+import { config } from '@shared/api/config/config';
+import { IResponse, IResult } from '@shared/types/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 type CardQueryParams = {

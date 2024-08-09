@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
-import { wrapper } from '@/components/app/store/store';
+import { wrapper } from '@app/store/store';
 
-import { getCardsInfo, searchCard } from '@/components/entities/Cards/api/cardApi';
-import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
-import { IResponse, IResult } from '@/components/shared/types/types';
-import { MainPage } from '@/components/pages/MainPage';
-import { CardDetails } from '@/components/pages/CardDetails';
+import { getCardsInfo, searchCard } from '@entities/Cards/api/cardApi';
+import { DEFAULT_PAGE } from '@shared/constants/constats';
+import { IResponse, IResult } from '@shared/types/types';
+import { MainPage } from '@pages/MainPage';
+import { CardDetails } from '@pages/CardDetails';
 
 type HomeProps = {
   data: {

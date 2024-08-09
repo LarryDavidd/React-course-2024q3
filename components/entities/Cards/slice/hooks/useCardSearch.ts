@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
+import { DEFAULT_PAGE } from '@shared/constants/constats';
 import { useRouter } from 'next/router';
 
 const useCardSearch = () => {

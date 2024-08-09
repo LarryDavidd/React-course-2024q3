@@ -1,6 +1,6 @@
-import { IResponse } from '@/components/shared/types/types';
-import { axiosInstance } from '@/components/shared/api/axiosInstance';
-import { config } from '@/components/shared/api/config/config';
+import { IResponse } from '@shared/types/types';
+import { axiosInstance } from '@shared/api/axiosInstance';
+import { config } from '@shared/api/config/config';
 
 async function getSingleCardsInfo(id: string) {
   const apiUrl = config.baseUrl + '/' + id;

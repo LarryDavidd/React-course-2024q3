@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import HeaderSearchBar from '@/components/features/HeaderSearchBar';
-import ErrorButton from '@/components/shared/components/ErrorButton';
-import useCardSearch from '@/components/entities/Cards/slice/hooks/useCardSearch';
-import FavoritesModal from '@/components/widgets/FavoritesModal/ui/FavoritesModal';
-import useAppSelector from '@/components/app/store/hooks/useAppSelector';
+import HeaderSearchBar from '@features/HeaderSearchBar';
+import ErrorButton from '@shared/components/ErrorButton';
+import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
+import FavoritesModal from '@widgets/FavoritesModal/ui/FavoritesModal';
+import useAppSelector from '@app/store/hooks/useAppSelector';
 
 const MainHeader: React.FC = () => {
   const { favorites } = useAppSelector((state) => state.favoriteSlice);

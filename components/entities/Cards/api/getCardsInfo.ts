@@ -1,6 +1,6 @@
-import { IResult } from '@/components/shared/types/types';
-import { axiosInstance } from '@/components/shared/api/axiosInstance';
-import { config } from '@/components/shared/api/config/config';
+import { IResult } from '@shared/types/types';
+import { axiosInstance } from '@shared/api/axiosInstance';
+import { config } from '@shared/api/config/config';
 
 async function getCardsInfo(queryArgs: string[] = [], offset = 1, limit = 10) {
   if (offset < 1) offset = 1;
