@@ -1,6 +1,6 @@
-import useAppDispatch from '@/app/store/hooks/useAppDispatch';
-import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/shared/constants/constats';
-import { UseLocalStorage } from '@/shared/lib';
+import useAppDispatch from '@/components/app/store/hooks/useAppDispatch';
+import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/components/shared/constants/constats';
+import { UseLocalStorage } from '@/components/shared/lib';
 import { useSearchParams } from 'react-router-dom';
 import { setCurrentPage, setSaveText } from '../search.slice';
 

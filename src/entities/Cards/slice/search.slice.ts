@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DEFAULT_PAGE } from '@shared/constants/constats';
+import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
 
 const initialState = {
   cardsInfo: [],

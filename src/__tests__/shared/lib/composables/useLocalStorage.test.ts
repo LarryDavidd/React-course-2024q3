@@ -1,4 +1,4 @@
-import { UseLocalStorage } from '@/shared/lib';
+import { UseLocalStorage } from '@/components/shared/lib';
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 

@@ -1,4 +1,4 @@
-import { Pagination } from '@/shared/ui-kits/navigation';
+import { Pagination } from '@/components/shared/ui-kits/navigation';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';

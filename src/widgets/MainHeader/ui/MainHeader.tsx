@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import HeaderSearchBar from '@features/HeaderSearchBar';
-import { UseLocalStorage } from '@shared/lib';
-import ErrorButton from '@shared/components/ErrorButton';
-import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
-import { SimpleButton } from '@/shared/ui-kits/buttons';
-import { useTheme } from '@/shared/context/themeProvider';
-import FavoritesModal from '@/widgets/FavoritesModal/ui/FavoritesModal';
-import useAppSelector from '@/app/store/hooks/useAppSelector';
+import HeaderSearchBar from '@/components/features/HeaderSearchBar';
+import { UseLocalStorage } from '@/components/shared/lib';
+import ErrorButton from '@/components/shared/components/ErrorButton';
+import useCardSearch from '@/components/entities/Cards/slice/hooks/useCardSearch';
+import { SimpleButton } from '@/components/shared/ui-kits/buttons';
+import { useTheme } from '@/components/shared/context/themeProvider';
+import FavoritesModal from '@/components/widgets/FavoritesModal/ui/FavoritesModal';
+import useAppSelector from '@/components/app/store/hooks/useAppSelector';
 
 const MainHeader: React.FC = () => {
   const { getAllCards } = useCardSearch();

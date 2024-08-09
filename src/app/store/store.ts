@@ -1,5 +1,5 @@
-import favoriteSlice from '@/features/favorites/favorite.slice';
-import { cardApi, searchSlice } from '@entities/Cards';
+import favoriteSlice from '@/components/features/favorites/favorite.slice';
+import { cardApi, searchSlice } from '@/components/entities/Cards';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 

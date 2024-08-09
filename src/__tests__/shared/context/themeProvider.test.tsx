@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider, useTheme } from '@/shared/context/themeProvider';
+import { ThemeProvider, useTheme } from '@/components/shared/context/themeProvider';
 import { describe, expect, it } from 'vitest';
 
 const TestComponent: React.FC = () => {

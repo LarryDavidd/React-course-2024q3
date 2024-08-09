@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { IResponse } from '@shared/types/types';
+import { IResponse } from '@/components/shared/types/types';
 import { describe, it, expect } from 'vitest';
-import { Item } from '@entities/Cards';
+import { Item } from '@/components/entities/Cards';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';

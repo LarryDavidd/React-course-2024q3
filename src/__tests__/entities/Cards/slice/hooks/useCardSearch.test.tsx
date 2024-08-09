@@ -1,15 +1,15 @@
 import { renderHook, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
-import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/shared/constants/constats';
-import { UseLocalStorage } from '@/shared/lib';
+import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/components/shared/constants/constats';
+import { UseLocalStorage } from '@/components/shared/lib';
 import { useSearchParams } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import useCardSearch from '@/entities/Cards/slice/hooks/useCardSearch';
-import { setCurrentPage, setSaveText } from '@/entities/Cards/slice/search.slice';
+import useCardSearch from '@/components/entities/Cards/slice/hooks/useCardSearch';
+import { setCurrentPage, setSaveText } from '@/components/entities/Cards/slice/search.slice';
 import '@testing-library/jest-dom';
 
-vi.mock('@/shared/lib', () => ({
+vi.mock('@/components/shared/lib', () => ({
   UseLocalStorage: vi.fn()
 }));
 

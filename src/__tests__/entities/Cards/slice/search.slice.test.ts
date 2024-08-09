@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { DEFAULT_PAGE } from '@shared/constants/constats';
-import reducer, { setData, setSaveText, setLoadingCard, setLoadingCards, setCurrentPage } from '@/entities/Cards/slice/search.slice';
+import { DEFAULT_PAGE } from '@/components/shared/constants/constats';
+import reducer, { setData, setSaveText, setLoadingCard, setLoadingCards, setCurrentPage } from '@/components/entities/Cards/slice/search.slice';
 
 describe('searchSlice', () => {
   const initialState = {

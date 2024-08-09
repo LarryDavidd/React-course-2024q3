@@ -2,40 +2,40 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useTheme } from '@/shared/context/themeProvider';
-import { UseLocalStorage } from '@shared/lib';
-import useCardSearch from '@entities/Cards/slice/hooks/useCardSearch';
+import { useTheme } from '@/components/shared/context/themeProvider';
+import { UseLocalStorage } from '@/components/shared/lib';
+import useCardSearch from '@/components/entities/Cards/slice/hooks/useCardSearch';
 import { MemoryRouter } from 'react-router-dom';
-import { MainHeader } from '@/widgets/MainHeader';
+import { MainHeader } from '@/components/widgets/MainHeader';
 import { reqestMockData } from '@/__mocks__';
 import '@testing-library/jest-dom';
-import { ButtonProps } from '@/shared/ui-kits/buttons/SimpleButton/SimpleButton';
+import { ButtonProps } from '@/components/shared/ui-kits/buttons/SimpleButton/SimpleButton';
 
 const mockStore = configureStore([]);
 
-vi.mock('@shared/context/themeProvider', () => ({
+vi.mock('@/components/shared/context/themeProvider', () => ({
   useTheme: vi.fn()
 }));
 
-vi.mock('@shared/lib', () => ({
+vi.mock('@/components/shared/lib', () => ({
   UseLocalStorage: vi.fn()
 }));
 
-vi.mock('@entities/Cards/slice/hooks/useCardSearch', () => ({
+vi.mock('@/components/entities/Cards/slice/hooks/useCardSearch', () => ({
   __esModule: true,
   default: vi.fn()
 }));
 
-vi.mock('@shared/components/ErrorButton', () => ({
+vi.mock('@/components/shared/components/ErrorButton', () => ({
   __esModule: true,
   default: () => <button>Error Button</button>
 }));
 
-vi.mock('@/shared/ui-kits/buttons', () => ({
+vi.mock('@/components/shared/ui-kits/buttons', () => ({
   SimpleButton: ({ onClick, buttonDetails }: ButtonProps) => <button onClick={onClick}>{buttonDetails.name}</button>
 }));
 
-vi.mock('@/widgets/FavoritesModal/ui/FavoritesModal', () => ({
+vi.mock('@/components/widgets/FavoritesModal/ui/FavoritesModal', () => ({
   __esModule: true,
   default: () => <div>Favorites Modal</div>
 }));

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import Form from '@shared/ui-kits/forms/BaseForm/BaseForm';
+import Form from '@/components/shared/ui-kits/forms/BaseForm/BaseForm';
 
 describe('Form', () => {
   it('renders form with children', () => {

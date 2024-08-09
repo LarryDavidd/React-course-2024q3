@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { useSearchCardQuery } from '@entities/Cards/api/cardApi'; // Подключаем тип
+import { useSearchCardQuery } from '@/components/entities/Cards/api/cardApi'; // Подключаем тип
 import { CardDetails } from '@/pages/CardDetails';
 import '@testing-library/jest-dom';
 
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 // Мокаем useSearchCardQuery хук
-vi.mock('@entities/Cards/api/cardApi', () => ({
+vi.mock('@/components/entities/Cards/api/cardApi', () => ({
   useSearchCardQuery: vi.fn()
 }));
 

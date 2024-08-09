@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
-import { Item } from '@entities/Cards';
-import { ItemList } from '@entities/Cards';
-import { PageSpinner } from '@shared/ui-kits/spinner';
-import NotFoundSection from '@shared/ui-kits/sections';
-import { IResponse } from '@shared/types/types';
-import { UseLocalStorage } from '@shared/lib';
-import { Pagination } from '@shared/ui-kits/navigation';
-import { MainHeader } from '@widgets/MainHeader';
-import { setCurrentPage, setData, setLoadingCards, setSaveText } from '@entities/Cards/slice/search.slice';
-import useAppDispatch from '@app/store/hooks/useAppDispatch';
-import useAppSelector from '@app/store/hooks/useAppSelector';
-import { useGetCardsInfoQuery } from '@entities/Cards/api/cardApi';
-import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@shared/constants/constats';
+import { Item } from '@/components/entities/Cards';
+import { ItemList } from '@/components/entities/Cards';
+import { PageSpinner } from '@/components/shared/ui-kits/spinner';
+import NotFoundSection from '@/components/shared/ui-kits/sections';
+import { IResponse } from '@/components/shared/types/types';
+import { UseLocalStorage } from '@/components/shared/lib';
+import { Pagination } from '@/components/shared/ui-kits/navigation';
+import { MainHeader } from '@/components/widgets/MainHeader';
+import { setCurrentPage, setData, setLoadingCards, setSaveText } from '@/components/entities/Cards/slice/search.slice';
+import useAppDispatch from '@/components/app/store/hooks/useAppDispatch';
+import useAppSelector from '@/components/app/store/hooks/useAppSelector';
+import { useGetCardsInfoQuery } from '@/components/entities/Cards/api/cardApi';
+import { DEFAULT_PAGE, LOCAL_STORAGE_KEY } from '@/components/shared/constants/constats';
 import { Dispatch } from '@reduxjs/toolkit';
 
 const myThunk = (inputValue: string, currentPage: number) => (dispatch: Dispatch) => {

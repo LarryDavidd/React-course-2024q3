@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { config } from '@shared/api/config/config';
+import { config } from '@/components/shared/api/config/config';
 import { reqestMockData } from '@/__mocks__';
-import { getCardsInfo } from '@/entities/Cards';
+import { getCardsInfo } from '@/components/entities/Cards';
 
 describe('getCardsInfo', () => {
   let mock: MockAdapter;

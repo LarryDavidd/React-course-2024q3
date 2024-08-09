@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, test, vi } from 'vitest';
-import SimpleButton, { ButtonDetails } from '@shared/ui-kits/buttons/SimpleButton/SimpleButton';
+import SimpleButton, { ButtonDetails } from '@/components/shared/ui-kits/buttons/SimpleButton/SimpleButton';
 
 describe('SimpleButton', () => {
   const buttonDetails: ButtonDetails = {

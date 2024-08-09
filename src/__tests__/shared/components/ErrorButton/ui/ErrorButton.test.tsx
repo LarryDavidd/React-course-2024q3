@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ErrorButton from '@shared/components/ErrorButton/ui/ErrorButton';
+import ErrorButton from '@/components/shared/components/ErrorButton/ui/ErrorButton';
 import { describe, expect, it } from 'vitest';
 
 describe('ErrorButton', () => {

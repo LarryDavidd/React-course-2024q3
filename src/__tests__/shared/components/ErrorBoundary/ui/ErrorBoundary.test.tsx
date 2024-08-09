@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import ErrorBoundary from '@shared/components/ErrorBoundary/ui/ErrorBoundary';
+import ErrorBoundary from '@/components/shared/components/ErrorBoundary/ui/ErrorBoundary';
 
 vi.mock('../components/ErrorBlock', () => ({
   __esModule: true,

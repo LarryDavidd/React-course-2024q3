@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import SearchBar from '@shared/ui-kits/input/SearchBar/SearchBar';
-import { ButtonProps } from '@shared/ui-kits/buttons/SimpleButton/SimpleButton';
-import { InputProps } from '@shared/ui-kits/input/BaseInput/BaseInput';
+import SearchBar from '@/components/shared/ui-kits/input/SearchBar/SearchBar';
+import { ButtonProps } from '@/components/shared/ui-kits/buttons/SimpleButton/SimpleButton';
+import { InputProps } from '@/components/shared/ui-kits/input/BaseInput/BaseInput';
 import { FormProps } from 'react-router-dom';
 
-vi.mock('@shared/ui-kits/input', () => ({
+vi.mock('@/components/shared/ui-kits/input', () => ({
   BaseInput: ({ onChange, inputDetails }: InputProps) => (
     <input
       type={inputDetails.type || 'text'}
@@ -17,7 +17,7 @@ vi.mock('@shared/ui-kits/input', () => ({
   )
 }));
 
-vi.mock('@shared/ui-kits/buttons', () => ({
+vi.mock('@/components/shared/ui-kits/buttons', () => ({
   SimpleButton: ({ onClick, buttonDetails }: ButtonProps) => (
     <button
       type="button"
@@ -28,7 +28,7 @@ vi.mock('@shared/ui-kits/buttons', () => ({
   )
 }));
 
-vi.mock('@shared/ui-kits/forms', () => ({
+vi.mock('@/components/shared/ui-kits/forms', () => ({
   BaseForm: ({ onSubmit, children }: FormProps) => (
     <form
       role="form"

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSearchCardQuery } from '@entities/Cards/api/cardApi';
-import { Item } from '@entities/Cards';
-import { PageSpinner } from '@shared/ui-kits/spinner';
-import NotFoundSection from '@shared/ui-kits/sections';
-import { CloseButton } from '@shared/ui-kits/buttons';
-import { IResponse } from '@shared/types/types';
+import { useSearchCardQuery } from '@/components/entities/Cards/api/cardApi';
+import { Item } from '@/components/entities/Cards';
+import { PageSpinner } from '@/components/shared/ui-kits/spinner';
+import NotFoundSection from '@/components/shared/ui-kits/sections';
+import { CloseButton } from '@/components/shared/ui-kits/buttons';
+import { IResponse } from '@/components/shared/types/types';
 
 const CardDetails: React.FC = () => {
   const [cardInfo, setCardInfo] = useState<IResponse | null>(null);
