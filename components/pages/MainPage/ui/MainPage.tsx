@@ -21,10 +21,12 @@ const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
   const searchParams = useSearchParams();
 
   const changeUrl = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('page', page.toString());
+    if (page > 1 && data && page < data?.info.pages) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('page', page.toString());
 
-    router.push(pathname + '?' + params.toString());
+      router.push(pathname + '?' + params.toString());
+    }
   };
 
   const numberOfPage = Number(searchParams.get('page')) || DEFAULT_PAGE;
