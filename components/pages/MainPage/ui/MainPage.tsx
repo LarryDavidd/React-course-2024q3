@@ -17,11 +17,13 @@ const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
   const router = useRouter();
 
   const changeUrl = (page: number) => {
-    const query = { ...router.query, page };
-    router.push({
-      pathname: router.pathname,
-      query
-    });
+    if (page > 1 && data && page < data?.info.pages) {
+      const query = { ...router.query, page };
+      router.push({
+        pathname: router.pathname,
+        query
+      });
+    }
   };
 
   const { page } = router.query;
