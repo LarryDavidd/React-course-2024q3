@@ -1,7 +1,9 @@
+'use client';
+
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import { IResponse, IResult } from '@shared/types/types';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { DEFAULT_PAGE } from '@shared/constants/constats';
 import NotFoundSection from '@shared/ui-kits/sections';
 import { MainHeader } from '@widgets/MainHeader';
@@ -15,17 +17,17 @@ type MainPageProps = {
 
 const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const changeUrl = (page: number) => {
-    const query = { ...router.query, page };
-    router.push({
-      pathname: router.pathname,
-      query
-    });
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', page.toString());
+
+    router.push(pathname + '?' + params.toString());
   };
 
-  const { page } = router.query;
-  const numberOfPage = Number(page) || DEFAULT_PAGE;
+  const numberOfPage = Number(searchParams.get('page')) || DEFAULT_PAGE;
 
   const renderItems = () => {
     if (data) {
@@ -42,10 +44,7 @@ const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
             <ItemList>
               {data.results.map((character: IResponse) => (
                 <Link
-                  href={{
-                    pathname: `/${character.id}`,
-                    query: { ...router.query }
-                  }}
+                  href={`/${character.id}?${searchParams.toString()}`}
                   key={character.id}
                 >
                   <Item character={character} />

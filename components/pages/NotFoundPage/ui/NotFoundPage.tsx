@@ -1,5 +1,7 @@
+'use client';
+
+import Link from 'next/link';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -10,7 +12,7 @@ const NotFoundPage: React.FC = () => {
           <p className="dark:text-white·md:text-4xl mb-4 text-3xl font-bold tracking-tight text-gray-900">Something's missing.</p>
           <p className="dark:text-white·md:text-4xl mb-4 text-lg font-light text-gray-500">Sorry, we can't find that page. You'll find lots to explore on the home page.</p>
           <Link
-            to="/"
+            href="/"
             className="my-4 inline-flex rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
           >
             Back to Homepage

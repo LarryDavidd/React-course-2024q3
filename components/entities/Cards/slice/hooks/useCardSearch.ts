@@ -1,19 +1,17 @@
 import { DEFAULT_PAGE } from '@shared/constants/constats';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const useCardSearch = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const getAllCards = (res: string) => {
-    const query = {
-      ...router.query,
-      page: DEFAULT_PAGE,
-      value: res.trim()
-    };
-    router.push({
-      pathname: router.pathname,
-      query
-    });
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', String(DEFAULT_PAGE));
+    params.set('value', res.trim());
+
+    router.push(pathname + '?' + params.toString());
   };
 
   return { getAllCards };

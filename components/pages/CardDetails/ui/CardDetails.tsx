@@ -1,10 +1,10 @@
+'use client';
+
 import { Item } from '@entities/Cards';
-import { DEFAULT_PAGE } from '@shared/constants/constats';
 import { IResponse } from '@shared/types/types';
 import { CloseButton } from '@shared/ui-kits/buttons';
 import NotFoundSection from '@shared/ui-kits/sections';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type CardDetailsProps = {
   data?: IResponse;
@@ -12,10 +12,14 @@ type CardDetailsProps = {
 
 const CardDetails: React.FC<CardDetailsProps> = ({ data }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const { page, value } = router.query;
+  const onRedirect = () => {
+    const params = new URLSearchParams(searchParams.toString());
 
-  const [newPage, newValue] = [page ?? DEFAULT_PAGE, value ?? ''];
+    router.push(pathname + '?' + params.toString());
+  };
 
   const renderItem = () => {
     if (data) {
@@ -23,12 +27,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({ data }) => {
         <div className="sticky top-0">
           <div className="relative flex">
             <Item character={data} />
-            <Link
-              href={`/?page=${newPage}&value=${newValue}`}
-              className="absolute"
-            >
-              <CloseButton onClick={() => {}} />
-            </Link>
+            <CloseButton onClick={onRedirect} />
           </div>
         </div>
       );
