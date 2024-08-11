@@ -1,4 +1,7 @@
+import Providers from '@/components/app/store/Provider';
 import type { Metadata } from 'next';
+import '@app/styles/tailwind.scss';
+import ThemeContainer from '@/components/shared/context/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -14,7 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeContainer>
+          <Providers>{children}</Providers>
+        </ThemeContainer>
+      </body>
     </html>
   );
 }

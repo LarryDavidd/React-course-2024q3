@@ -21,7 +21,7 @@ const MainPage: React.FC<MainPageProps> = ({ data, children }) => {
   const searchParams = useSearchParams();
 
   const changeUrl = (page: number) => {
-    if (page > 1 && data && page < data?.info.pages) {
+    if (page > 0 && data && page < data?.info.pages) {
       const params = new URLSearchParams(searchParams.toString());
       params.set('page', page.toString());
 

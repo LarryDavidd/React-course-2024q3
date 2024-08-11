@@ -1,3 +1,5 @@
+'use client';
+
 import { Provider } from 'react-redux';
 import { FC, ReactNode } from 'react';
 import { setupStore } from './store';

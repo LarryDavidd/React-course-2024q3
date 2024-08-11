@@ -4,7 +4,7 @@ import { Item } from '@entities/Cards';
 import { IResponse } from '@shared/types/types';
 import { CloseButton } from '@shared/ui-kits/buttons';
 import NotFoundSection from '@shared/ui-kits/sections';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type CardDetailsProps = {
   data?: IResponse;
@@ -12,13 +12,12 @@ type CardDetailsProps = {
 
 const CardDetails: React.FC<CardDetailsProps> = ({ data }) => {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const onRedirect = () => {
     const params = new URLSearchParams(searchParams.toString());
 
-    router.push(pathname + '?' + params.toString());
+    router.push(`/?${params.toString()}`);
   };
 
   const renderItem = () => {
