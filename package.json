@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
+    "dev": "remix vite:dev",
+    "build": "tsc -b && remix vite:build",
+    "start": "remix-serve ./build/server/index.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "format:fix": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "format:fix": "prettier --write \"app/**/*.{ts,tsx,css}\"",
     "preview": "vite preview",
     "prepare": "husky install",
     "test:unit": "vitest",
@@ -16,7 +16,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
+    "@remix-run/node": "^2.11.1",
+    "@remix-run/react": "^2.11.1",
+    "@remix-run/serve": "^2.11.1",
     "axios": "^1.7.2",
+    "isbot": "^4.4.0",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -24,6 +28,7 @@
     "vitest": "^2.0.2"
   },
   "devDependencies": {
+    "@remix-run/dev": "^2.11.1",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/node": "^22.0.0",
@@ -57,7 +62,8 @@
     "sass": "^1.77.6",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite": "^5.4.0",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^5.0.1"
   }
 }

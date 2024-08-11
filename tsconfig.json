@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["@testing-library/jest-dom"],
+    "types": ["@remix-run/node", "vite/client"],
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
@@ -21,25 +21,25 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["./*"],
-      "@app/*": ["./components/app/*"],
-      "@pages/*": ["./components/pages/*"],
-      "@widgets/*": ["./components/widgets/*"],
-      "@features/*": ["./components/features/*"],
-      "@entities/*": ["./components/entities/*"],
-      "@shared/*": ["./components/shared/*"]
+      "@/*": ["./app/*"],
+      "@app/*": ["./app/components/app/*"],
+      "@pages/*": ["./app/components/pages/*"],
+      "@widgets/*": ["./app/components/widgets/*"],
+      "@features/*": ["./app/components/features/*"],
+      "@entities/*": ["./app/components/entities/*"],
+      "@shared/*": ["./app/components/shared/*"]
     },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    // "plugins": [
+    //   {
+    //     "name": "next"
+    //   }
+    // ],
     "esModuleInterop": true,
     "jsx": "preserve",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true
   },
-  "include": ["jest.config.ts", "next.config.js", "next-env.d.ts", "**/*.ts", "**/*.tsx", "./dist/types/**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "**/.server/**/*.ts", "**/.server/**/*.tsx", "**/.client/**/*.ts", "**/.client/**/*.tsx"],
   "exclude": ["node_modules"]
 }

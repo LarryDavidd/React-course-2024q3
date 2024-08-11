@@ -6,10 +6,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'prettier',
     'plugin:prettier/recommended',
-    'plugin:tailwindcss/recommended',
-    'next/core-web-vitals'
+    'plugin:tailwindcss/recommended'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'next.config.mjs'],
+  ignorePatterns: ['dist', 'next.config.mjs', '!**/.server', '!**/.client', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
