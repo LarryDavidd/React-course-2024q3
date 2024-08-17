@@ -8,7 +8,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:tailwindcss/recommended'
   ],
-  ignorePatterns: ['dist', 'next.config.mjs', '!**/.server', '!**/.client', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   env: {
     browser: true,
