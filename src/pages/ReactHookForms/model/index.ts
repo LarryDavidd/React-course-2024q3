@@ -11,7 +11,7 @@ export type fillFormState = {
   confirmPassword: string;
   gender: string;
   accept: boolean;
-  image: ImageInfoType;
+  image: ImageInfoType | string;
   country: string;
 };
 

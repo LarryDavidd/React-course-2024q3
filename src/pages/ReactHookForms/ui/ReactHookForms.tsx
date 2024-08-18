@@ -13,8 +13,31 @@ import {
 } from '@shared/validate/validationShemas';
 import { fillFormState, FormData } from '../model';
 import { CONTACT_INPUT_FIELDS, COUNTRIES, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
+import { MainHeader } from '@/widgets/MainHeader';
+import useAppDispatch from '@/app/store/hooks/useAppDispatch';
+import { useNavigate } from 'react-router-dom';
+import { setReactHookForm } from '@/entities/CardsFromForm/slice/forms.slice';
+import { ChangeEvent, useState } from 'react';
 
 const ReactHookForm = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [submitedFile, setSubmitedFile] = useState('');
+
+  const onFileSubmit = (event: ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    const selectedFile = files && files.length > 0 ? files[0] : null;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result as string;
+      setSubmitedFile(base64);
+    };
+
+    if (selectedFile) reader.readAsDataURL(selectedFile);
+  };
+
   const validationSchema = yup.object({
     name: nameValidationSchema,
     email: emailValidationSchema,
@@ -30,7 +53,8 @@ const ReactHookForm = () => {
   const {
     handleSubmit,
     formState: { errors },
-    register
+    register,
+    reset
   } = useForm({
     resolver: yupResolver(validationSchema),
     mode: 'all'
@@ -45,90 +69,100 @@ const ReactHookForm = () => {
       confirmPassword: data.confirmPassword,
       gender: data.gender,
       accept: data.accept,
-      image: data.image,
+      image: submitedFile,
       country: data.country
     };
 
-    console.log(fillForm, data.image);
+    dispatch(
+      setReactHookForm({
+        newForm: fillForm as fillFormState
+      })
+    );
+    reset();
+    navigate('/');
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-    >
-      {CONTACT_INPUT_FIELDS.map(({ type, inputName, placeholder }, i) => (
-        <div key={i}>
-          <input
-            type={type}
-            placeholder={placeholder}
-            {...register(inputName as keyof FormData)}
-          />
-          <div>{errors[inputName as keyof FormData]?.message}</div>
-        </div>
-      ))}
-      {PASSWORD_INPUT_FIELDS.map(({ type, inputName, placeholder }, i) => (
-        <div key={i}>
-          <input
-            type={type}
-            placeholder={placeholder}
-            {...register(inputName as keyof FormData)}
-          />
-          <div>{errors[inputName as keyof FormData]?.message}</div>
-        </div>
-      ))}
-      {GENDER_TYPE.map((gender) => (
-        <label key={gender}>
-          <input
-            type="radio"
-            name="gender"
-            defaultValue={gender}
-            {...(register ? { ...register('gender' as keyof FormData) } : '')}
-          />
-          {gender}
-        </label>
-      ))}
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            {...(register ? { ...register('accept' as keyof FormData) } : '')}
-          />
-          I accept the Terms and Conditions
-        </label>
-        <div>{errors.accept?.message}</div>
-      </div>
-      <div>
-        <input
-          {...register('image')}
-          type="file"
-          accept="image/png, image/jpeg"
-          id="fileInput"
-        />
-        <label>Choose a file</label>
-        <div>{errors.image?.message}</div>
-      </div>
-      <div>
-        <input
-          {...register('country')}
-          placeholder="Enter Country"
-          type="text"
-          id="country"
-          list="countryList"
-        />
-        <div>{errors.country?.message}</div>
-        <datalist id="countryList">
-          {COUNTRIES.map((country: string) => (
-            <option
-              aria-hidden="true"
-              key={country}
-              value={country}
+    <>
+      <MainHeader />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        {CONTACT_INPUT_FIELDS.map(({ type, inputName, placeholder }, i) => (
+          <div key={i}>
+            <input
+              type={type}
+              placeholder={placeholder}
+              {...register(inputName as keyof FormData)}
             />
-          ))}
-        </datalist>
-      </div>
-      <button>submit</button>
-    </form>
+            <div>{errors[inputName as keyof FormData]?.message}</div>
+          </div>
+        ))}
+        {PASSWORD_INPUT_FIELDS.map(({ type, inputName, placeholder }, i) => (
+          <div key={i}>
+            <input
+              type={type}
+              placeholder={placeholder}
+              {...register(inputName as keyof FormData)}
+            />
+            <div>{errors[inputName as keyof FormData]?.message}</div>
+          </div>
+        ))}
+        {GENDER_TYPE.map((gender) => (
+          <label key={gender}>
+            <input
+              type="radio"
+              name="gender"
+              defaultValue={gender}
+              {...(register ? { ...register('gender' as keyof FormData) } : '')}
+            />
+            {gender}
+          </label>
+        ))}
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              {...(register ? { ...register('accept' as keyof FormData) } : '')}
+            />
+            I accept the Terms and Conditions
+          </label>
+          <div>{errors.accept?.message}</div>
+        </div>
+        <div>
+          <input
+            {...register('image')}
+            type="file"
+            onChange={onFileSubmit}
+            accept="image/png, image/jpeg"
+            id="fileInput"
+          />
+          <label>Choose a file</label>
+          <div>{errors.image?.message}</div>
+        </div>
+        <div>
+          <input
+            {...register('country')}
+            placeholder="Enter Country"
+            type="text"
+            id="country"
+            list="countryList"
+          />
+          <div>{errors.country?.message}</div>
+          <datalist id="countryList">
+            {COUNTRIES.map((country: string) => (
+              <option
+                aria-hidden="true"
+                key={country}
+                value={country}
+              />
+            ))}
+          </datalist>
+        </div>
+        <button>submit</button>
+      </form>
+    </>
   );
 };
 
