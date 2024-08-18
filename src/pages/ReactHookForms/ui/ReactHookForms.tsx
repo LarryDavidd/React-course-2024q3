@@ -5,6 +5,7 @@ import {
   acceptHookFormValidationSchema,
   ageValidationSchema,
   emailValidationSchema,
+  imageHookFormValidationSchema,
   nameValidationSchema,
   passwordValidationSchema,
   requiredFieldValidationSchema
@@ -20,7 +21,8 @@ const ReactHookForm = () => {
     password: passwordValidationSchema.fields.password as yup.StringSchema,
     confirmPassword: passwordValidationSchema.fields.confirmPassword as yup.StringSchema,
     gender: requiredFieldValidationSchema,
-    accept: acceptHookFormValidationSchema
+    accept: acceptHookFormValidationSchema,
+    image: imageHookFormValidationSchema
   });
 
   const {
@@ -40,10 +42,11 @@ const ReactHookForm = () => {
       password: data.password,
       confirmPassword: data.confirmPassword,
       gender: data.gender,
-      accept: data.accept
+      accept: data.accept,
+      image: data.image
     };
 
-    console.log(fillForm);
+    console.log(fillForm, data.image);
   };
 
   return (
@@ -82,13 +85,26 @@ const ReactHookForm = () => {
           {gender}
         </label>
       ))}
-      <label>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            {...(register ? { ...register('accept' as keyof FormData) } : '')}
+          />
+          I accept the Terms and Conditions
+        </label>
+        <div>{errors.accept?.message}</div>
+      </div>
+      <div>
         <input
-          type="checkbox"
-          {...(register ? { ...register('accept' as keyof FormData) } : '')}
+          {...register('image')}
+          type="file"
+          accept="image/png, image/jpeg"
+          id="fileInput"
         />
-        I accept the Terms and Conditions
-      </label>
+        <label>Choose a file</label>
+        <div>{errors.image?.message}</div>
+      </div>
       <button>submit</button>
     </form>
   );

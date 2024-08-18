@@ -53,3 +53,14 @@ export const passwordValidationSchema = yup.object({
 export const requiredFieldValidationSchema: yup.StringSchema = yup.string().required('This field is required');
 
 export const acceptHookFormValidationSchema = yup.boolean().oneOf([true], 'This field is required').required('This field is required');
+
+export const imageHookFormValidationSchema = yup
+  .mixed<FileList>()
+  .test('File presence', 'Image is required', (value) => !!(value as FileList)[0])
+  .test('Image extension', 'file should be jpeg or png', (value) => {
+    if (value) {
+      const extension = (value as FileList)[0]?.name.slice((value as FileList)[0].name.lastIndexOf('.'));
+      return ['.jpeg', '.jpg', '.png'].includes(extension);
+    }
+    return false;
+  });

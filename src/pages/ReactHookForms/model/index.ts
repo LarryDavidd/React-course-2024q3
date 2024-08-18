@@ -1,3 +1,8 @@
+export type ImageInfoType = {
+  imageInfo: { size: number; name: string } | null;
+  base64: string | null;
+};
+
 export type fillFormState = {
   name: string;
   age: string | number;
@@ -6,6 +11,7 @@ export type fillFormState = {
   confirmPassword: string;
   gender: string;
   accept: boolean;
+  image: ImageInfoType;
 };
 
 export interface FormData {
@@ -16,4 +22,5 @@ export interface FormData {
   confirmPassword?: string | undefined;
   gender?: string | undefined;
   accept?: boolean | undefined;
+  image?: FileList | undefined;
 }
