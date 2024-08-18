@@ -2,16 +2,17 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
-  acceptHookFormValidationSchema,
+  acceptHookValidationSchema,
   ageValidationSchema,
+  countryValidationSchema,
   emailValidationSchema,
-  imageHookFormValidationSchema,
+  imageHookValidationSchema,
   nameValidationSchema,
   passwordValidationSchema,
   requiredFieldValidationSchema
 } from '@shared/validate/validationShemas';
 import { fillFormState, FormData } from '../model';
-import { CONTACT_INPUT_FIELDS, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
+import { CONTACT_INPUT_FIELDS, COUNTRIES, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
 
 const ReactHookForm = () => {
   const validationSchema = yup.object({
@@ -21,8 +22,9 @@ const ReactHookForm = () => {
     password: passwordValidationSchema.fields.password as yup.StringSchema,
     confirmPassword: passwordValidationSchema.fields.confirmPassword as yup.StringSchema,
     gender: requiredFieldValidationSchema,
-    accept: acceptHookFormValidationSchema,
-    image: imageHookFormValidationSchema
+    accept: acceptHookValidationSchema,
+    country: countryValidationSchema,
+    image: imageHookValidationSchema
   });
 
   const {
@@ -43,7 +45,8 @@ const ReactHookForm = () => {
       confirmPassword: data.confirmPassword,
       gender: data.gender,
       accept: data.accept,
-      image: data.image
+      image: data.image,
+      country: data.country
     };
 
     console.log(fillForm, data.image);
@@ -104,6 +107,25 @@ const ReactHookForm = () => {
         />
         <label>Choose a file</label>
         <div>{errors.image?.message}</div>
+      </div>
+      <div>
+        <input
+          {...register('country')}
+          placeholder="Enter Country"
+          type="text"
+          id="country"
+          list="countryList"
+        />
+        <div>{errors.country?.message}</div>
+        <datalist id="countryList">
+          {COUNTRIES.map((country: string) => (
+            <option
+              aria-hidden="true"
+              key={country}
+              value={country}
+            />
+          ))}
+        </datalist>
       </div>
       <button>submit</button>
     </form>

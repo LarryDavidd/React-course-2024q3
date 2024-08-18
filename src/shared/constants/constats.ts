@@ -35,3 +35,34 @@ export const PASSWORD_INPUT_FIELDS = [
 ];
 
 export const GENDER_TYPE = ['Male', 'Female'];
+
+export const COUNTRIES = [
+  'Australia',
+  'Austria',
+  'Azerbaijan',
+  'Albania',
+  'Algeria',
+  'Angola',
+  'Andorra',
+  'Antigua and Barbuda',
+  'Argentina',
+  'Armenia',
+  'Aruba',
+  'Bahamas',
+  'Bangladesh',
+  'Barbados',
+  'Belarus',
+  'Belgium',
+  'Benin',
+  'Bulgaria',
+  'Bolivia',
+  'Bosnia and Herzegovina',
+  'Botswana',
+  'Brazil',
+  'Brunei',
+  'Burkina Faso',
+  'Burundi',
+  'Bhutan',
+  'Vanuatu',
+  'Vatican City'
+];

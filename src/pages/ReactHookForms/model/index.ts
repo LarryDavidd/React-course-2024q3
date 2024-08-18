@@ -12,6 +12,7 @@ export type fillFormState = {
   gender: string;
   accept: boolean;
   image: ImageInfoType;
+  country: string;
 };
 
 export interface FormData {
@@ -23,4 +24,5 @@ export interface FormData {
   gender?: string | undefined;
   accept?: boolean | undefined;
   image?: FileList | undefined;
+  country?: string | undefined;
 }
