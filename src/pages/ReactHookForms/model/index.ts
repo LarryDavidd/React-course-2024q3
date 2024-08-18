@@ -4,6 +4,7 @@ export type fillFormState = {
   email: string;
   password: string;
   confirmPassword: string;
+  gender?: string | undefined;
 };
 
 export interface FormData {
@@ -12,4 +13,5 @@ export interface FormData {
   email?: string | undefined;
   password?: string | undefined;
   confirmPassword?: string | undefined;
+  gender?: string | undefined;
 }

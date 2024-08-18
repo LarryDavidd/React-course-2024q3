@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { ageValidationSchema, emailValidationSchema, nameValidationSchema, passwordValidationSchema } from '@shared/validate/validationShemas';
+import { ageValidationSchema, emailValidationSchema, nameValidationSchema, passwordValidationSchema, requiredFieldValidationSchema } from '@shared/validate/validationShemas';
 import { fillFormState, FormData } from '../model';
-import { CONTACT_INPUT_FIELDS, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
+import { CONTACT_INPUT_FIELDS, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
 
 const ReactHookForm = () => {
   const validationSchema = yup.object({
@@ -11,7 +11,8 @@ const ReactHookForm = () => {
     email: emailValidationSchema,
     age: ageValidationSchema,
     password: passwordValidationSchema.fields.password as yup.StringSchema,
-    confirmPassword: passwordValidationSchema.fields.confirmPassword as yup.StringSchema
+    confirmPassword: passwordValidationSchema.fields.confirmPassword as yup.StringSchema,
+    gender: requiredFieldValidationSchema
   });
 
   const {
@@ -29,7 +30,8 @@ const ReactHookForm = () => {
       age: data.age,
       email: data.email,
       password: data.password,
-      confirmPassword: data.confirmPassword
+      confirmPassword: data.confirmPassword,
+      gender: data.gender
     };
 
     console.log(fillForm);
@@ -59,6 +61,17 @@ const ReactHookForm = () => {
           />
           <div>{errors[inputName as keyof FormData]?.message}</div>
         </div>
+      ))}
+      {GENDER_TYPE.map((gender) => (
+        <label key={gender}>
+          <input
+            type="radio"
+            name="gender"
+            defaultValue={gender}
+            {...(register ? { ...register('gender' as keyof FormData) } : '')}
+          />
+          {gender}
+        </label>
       ))}
       <button>submit</button>
     </form>

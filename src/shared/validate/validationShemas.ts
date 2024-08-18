@@ -49,3 +49,5 @@ export const passwordValidationSchema = yup.object({
     .required('Confirm Password is required')
     .oneOf([yup.ref('password')], 'Passwords must match')
 });
+
+export const requiredFieldValidationSchema: yup.StringSchema = yup.string().required('This field is required');

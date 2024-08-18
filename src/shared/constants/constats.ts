@@ -33,3 +33,5 @@ export const PASSWORD_INPUT_FIELDS = [
     inputName: 'confirmPassword'
   }
 ];
+
+export const GENDER_TYPE = ['Male', 'Female'];
