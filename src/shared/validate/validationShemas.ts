@@ -51,3 +51,5 @@ export const passwordValidationSchema = yup.object({
 });
 
 export const requiredFieldValidationSchema: yup.StringSchema = yup.string().required('This field is required');
+
+export const acceptHookFormValidationSchema = yup.boolean().oneOf([true], 'This field is required').required('This field is required');

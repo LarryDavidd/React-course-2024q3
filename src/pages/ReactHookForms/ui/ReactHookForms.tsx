@@ -1,7 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { ageValidationSchema, emailValidationSchema, nameValidationSchema, passwordValidationSchema, requiredFieldValidationSchema } from '@shared/validate/validationShemas';
+import {
+  acceptHookFormValidationSchema,
+  ageValidationSchema,
+  emailValidationSchema,
+  nameValidationSchema,
+  passwordValidationSchema,
+  requiredFieldValidationSchema
+} from '@shared/validate/validationShemas';
 import { fillFormState, FormData } from '../model';
 import { CONTACT_INPUT_FIELDS, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
 
@@ -12,7 +19,8 @@ const ReactHookForm = () => {
     age: ageValidationSchema,
     password: passwordValidationSchema.fields.password as yup.StringSchema,
     confirmPassword: passwordValidationSchema.fields.confirmPassword as yup.StringSchema,
-    gender: requiredFieldValidationSchema
+    gender: requiredFieldValidationSchema,
+    accept: acceptHookFormValidationSchema
   });
 
   const {
@@ -31,7 +39,8 @@ const ReactHookForm = () => {
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
-      gender: data.gender
+      gender: data.gender,
+      accept: data.accept
     };
 
     console.log(fillForm);
@@ -73,6 +82,13 @@ const ReactHookForm = () => {
           {gender}
         </label>
       ))}
+      <label>
+        <input
+          type="checkbox"
+          {...(register ? { ...register('accept' as keyof FormData) } : '')}
+        />
+        I accept the Terms and Conditions
+      </label>
       <button>submit</button>
     </form>
   );
