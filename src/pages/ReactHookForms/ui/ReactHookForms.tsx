@@ -90,6 +90,7 @@ const ReactHookForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
+        className="m-auto w-min"
       >
         {CONTACT_INPUT_FIELDS.map(({ type, inputName, placeholder }, i) => (
           <div key={i}>
@@ -111,17 +112,20 @@ const ReactHookForm = () => {
             <div>{errors[inputName as keyof FormData]?.message}</div>
           </div>
         ))}
-        {GENDER_TYPE.map((gender) => (
-          <label key={gender}>
-            <input
-              type="radio"
-              name="gender"
-              defaultValue={gender}
-              {...(register ? { ...register('gender' as keyof FormData) } : '')}
-            />
-            {gender}
-          </label>
-        ))}
+        <div>
+          {GENDER_TYPE.map((gender) => (
+            <label key={gender}>
+              <input
+                type="radio"
+                name="gender"
+                defaultValue={gender}
+                {...(register ? { ...register('gender' as keyof FormData) } : '')}
+              />
+              {gender}
+            </label>
+          ))}
+          <div>{errors['gender' as keyof FormData]?.message}</div>
+        </div>
         <div>
           <label>
             <input

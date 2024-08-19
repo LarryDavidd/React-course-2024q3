@@ -168,7 +168,10 @@ const UncontrolledForm: React.FC = () => {
     <>
       <MainHeader />
       <div>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className="m-auto w-min"
+        >
           <div>
             <label htmlFor="name">Name:</label>
             <input
@@ -178,7 +181,7 @@ const UncontrolledForm: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
             />
-            {errors.name && <span>{errors.name}</span>}
+            {errors.name && <p>{errors.name}</p>}
           </div>
 
           <div>
@@ -190,7 +193,7 @@ const UncontrolledForm: React.FC = () => {
               value={formData.age}
               onChange={handleChange}
             />
-            {errors.age && <span>{errors.age}</span>}
+            {errors.age && <p>{errors.age}</p>}
           </div>
 
           <div>
@@ -202,7 +205,7 @@ const UncontrolledForm: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
             />
-            {errors.email && <span>{errors.email}</span>}
+            {errors.email && <p>{errors.email}</p>}
           </div>
 
           <div>
@@ -214,7 +217,7 @@ const UncontrolledForm: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            {errors.password && <span>{errors.password}</span>}
+            {errors.password && <p>{errors.password}</p>}
           </div>
 
           <div>
@@ -226,7 +229,7 @@ const UncontrolledForm: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
-            {errors.confirmPassword && <span>{errors.confirmPassword}</span>}
+            {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
           </div>
 
           <div>
@@ -241,7 +244,7 @@ const UncontrolledForm: React.FC = () => {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-            {errors.gender && <span>{errors.gender}</span>}
+            {errors.gender && <p>{errors.gender}</p>}
           </div>
 
           <div>
@@ -261,7 +264,7 @@ const UncontrolledForm: React.FC = () => {
                 />
               ))}
             </datalist>
-            {errors.country && <span>{errors.country}</span>}
+            {errors.country && <p>{errors.country}</p>}
           </div>
 
           <div>
@@ -273,7 +276,7 @@ const UncontrolledForm: React.FC = () => {
               accept="image/png, image/jpeg"
               onChange={handleChange}
             />
-            {errors.picture && <span>{errors.picture}</span>}
+            {errors.picture && <p>{errors.picture}</p>}
           </div>
 
           <div>
@@ -287,7 +290,7 @@ const UncontrolledForm: React.FC = () => {
               />
               I accept the Terms and Conditions
             </label>
-            {errors.accept && <span>{errors.accept}</span>}
+            {errors.accept && <p>{errors.accept}</p>}
           </div>
 
           <button type="submit">Submit</button>
