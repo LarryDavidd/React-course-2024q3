@@ -3,11 +3,7 @@
 import * as defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}', // <-- Add this line
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}'
-  ],
+  content: ['./index.html', './src/**/*.tsx', './src/**/*.ts'],
   darkMode: 'class',
   daisyui: {
     themes: ['light', 'dark'],
