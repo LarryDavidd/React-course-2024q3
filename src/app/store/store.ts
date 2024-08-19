@@ -1,9 +1,11 @@
 import { formsSlice } from '@/entities/CardsFromForm';
+import countrySlice from '@/shared/slices/country.slice';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
-  formsSlice
+  formsSlice,
+  countrySlice
 });
 
 export const setupStore = () => {

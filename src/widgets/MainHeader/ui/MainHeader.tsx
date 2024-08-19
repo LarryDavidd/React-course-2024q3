@@ -16,7 +16,7 @@ const MainHeader: React.FC = () => {
         buttonDetails={{ name: 'To React Hook Forms' }}
       />
       <SimpleButton
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/simple-form')}
         buttonDetails={{ name: 'To Simple Form' }}
       />
     </header>

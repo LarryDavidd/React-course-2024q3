@@ -12,14 +12,16 @@ import {
   requiredFieldValidationSchema
 } from '@shared/validate/validationShemas';
 import { fillFormState, FormData } from '../model';
-import { CONTACT_INPUT_FIELDS, COUNTRIES, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
+import { CONTACT_INPUT_FIELDS, GENDER_TYPE, PASSWORD_INPUT_FIELDS } from '@/shared/constants/constats';
 import { MainHeader } from '@/widgets/MainHeader';
 import useAppDispatch from '@/app/store/hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
 import { setReactHookForm } from '@/entities/CardsFromForm/slice/forms.slice';
 import { ChangeEvent, useState } from 'react';
+import useAppSelector from '@/app/store/hooks/useAppSelector';
 
 const ReactHookForm = () => {
+  const countries = useAppSelector((state) => state.countrySlice);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -151,7 +153,7 @@ const ReactHookForm = () => {
           />
           <div>{errors.country?.message}</div>
           <datalist id="countryList">
-            {COUNTRIES.map((country: string) => (
+            {countries.map((country: string) => (
               <option
                 aria-hidden="true"
                 key={country}
